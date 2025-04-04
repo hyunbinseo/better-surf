@@ -8,4 +8,13 @@ export default defineConfig({
 		'@wxt-dev/module-svelte',
 	],
 	autoIcons: { baseIconPath: './assets/icon.svg' },
+	hooks: {
+		'build:manifestGenerated': (wxt, manifest) => {
+			manifest.content_scripts ??= [];
+			manifest.content_scripts.push({
+				css: ['content-scripts/moneypin-web.css'],
+				matches: ['https://web.moneypin.biz/*'],
+			});
+		},
+	},
 });
