@@ -2,6 +2,10 @@ import { defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
+	manifest: {
+		name: 'Better Surf',
+		description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
+	},
 	srcDir: 'src',
 	modules: [
 		'@wxt-dev/auto-icons', //
