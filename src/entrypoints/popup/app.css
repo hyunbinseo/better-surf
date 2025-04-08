@@ -1,0 +1,20 @@
+:root {
+	font-family: system-ui, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	color-scheme: light dark;
+	color: #fbfbfe;
+	background-color: #1c1b22;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #15141a;
+		background-color: #fff;
+	}
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+}
