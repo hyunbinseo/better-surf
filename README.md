@@ -1,5 +1,12 @@
 # Better Surf
 
+주관적인(opinionated) 오픈소스 확장 프로그램. 개인정보를 수집하지 않습니다.
+
+- [Chrome에 추가](https://chromewebstore.google.com/detail/better-surf/jhpnholkflkpnadabmadfcfgnbekijjf)
+- [Firefox에 추가](https://addons.mozilla.org/ko/firefox/addon/better-surf/)
+
+## 제공 기능
+
 - [뉴데일리]가 윤서인 씨 연재 매체임을 안내
 - [서울대학교 수강신청 시스템] 다중 접속 허용[^snu-sugang]
 

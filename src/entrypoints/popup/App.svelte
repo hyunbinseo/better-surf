@@ -4,6 +4,7 @@
 </script>
 
 <main>
+	<!-- FIXME Hyperlink does not work in Google Chrome. -->
 	{pkg.name} by <a href="https://github.com/hyunbinseo">{pkg.author}</a>
 </main>
 
