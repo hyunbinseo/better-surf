@@ -1,0 +1,26 @@
+header[role='banner'] {
+	& h1:only-child[role='heading'],
+	&
+		a[role='link'][aria-label]:is(
+			[href*='grok'],
+			[href*='jobs'],
+			[href*='premium'],
+			[href*='verified-orgs']
+		) {
+		display: none !important;
+	}
+}
+
+[data-testid='cellInnerDiv'] {
+	&:has([data-testid='inlinePrompt-primaryAction'] > a[href*='premium']) {
+		display: none !important;
+	}
+}
+
+[data-testid='sidebarColumn'] {
+	& :has(> aside[role='complementary']),
+	& :has(> section[aria-labelledby^='accessible-list-']),
+	& :has(> nav[role='navigation']) {
+		display: none !important;
+	}
+}
