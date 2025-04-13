@@ -9,6 +9,10 @@ header[role='banner'] {
 		) {
 		display: none !important;
 	}
+
+	& > div > div > div {
+		justify-content: center !important;
+	}
 }
 
 [data-testid='cellInnerDiv'] {
@@ -18,9 +22,15 @@ header[role='banner'] {
 }
 
 [data-testid='sidebarColumn'] {
-	& :has(> aside[role='complementary']),
-	& :has(> section[aria-labelledby^='accessible-list-']),
-	& :has(> nav[role='navigation']) {
+	& :not(:first-child):has(> * > aside[role='complementary']),
+	&
+		:has(
+			> :is(
+					aside[role='complementary'],
+					section[aria-labelledby^='accessible-list-'],
+					nav[role='navigation']
+				)
+		) {
 		display: none !important;
 	}
 }
