@@ -21,6 +21,8 @@ header[role='banner'] {
 }
 
 [data-testid='sidebarColumn'] {
+	/* Subscribe to Premium */
+	[data-testid='super-upsell-UpsellCardRenderProperties'],
 	:not(:first-child):has(> * > aside[role='complementary']),
 	:has(
 		> :is(
