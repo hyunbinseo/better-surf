@@ -1,7 +1,8 @@
 name: Submit
 
 on:
-  workflow_dispatch:
+  release:
+    types: [created]
 
 jobs:
   submit:

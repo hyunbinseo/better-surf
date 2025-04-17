@@ -2,8 +2,23 @@
 
 주관적인(opinionated) 오픈소스 확장 프로그램. 개인정보를 수집하지 않습니다.
 
-- [Chrome에 추가](https://chromewebstore.google.com/detail/better-surf/jhpnholkflkpnadabmadfcfgnbekijjf)
-- [Firefox에 추가](https://addons.mozilla.org/ko/firefox/addon/better-surf/)
+<!-- https://developer.chrome.com/docs/webstore/branding -->
+<a href="https://chromewebstore.google.com/detail/better-surf/jhpnholkflkpnadabmadfcfgnbekijjf">
+	<img
+		height="58"
+		alt="Available in the Chrome Web Store"
+		src="https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png"
+	/>
+</a>
+
+<!-- https://extensionworkshop.com/documentation/publish/promoting-your-extension/ -->
+<a href="https://addons.mozilla.org/ko/firefox/addon/better-surf/">
+	<img
+		height="58"
+		alt="Get the add-on for Firefox"
+		src="https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png"
+	/>
+</a>
 
 ## 제공 기능
 
