@@ -14,6 +14,10 @@ header[role='banner'] {
 	}
 }
 
+[data-testid='tweet']:lang(ko) {
+	word-break: keep-all;
+}
+
 [data-testid='cellInnerDiv'] {
 	&:has([data-testid='inlinePrompt-primaryAction'] > a[href*='premium']) {
 		display: none !important;
