@@ -14,7 +14,12 @@ export default defineConfig({
 				strict_min_version: '121.0', // CSS :has() support
 			},
 		},
-		permissions: ['activeTab'],
+		permissions: [
+			'activeTab', //
+			'contextMenus',
+			'downloads',
+		],
+		host_permissions: ['<all_urls>'],
 	},
 	vite: () => ({ build: { cssTarget: ['firefox121'] } }),
 	srcDir: 'src',
