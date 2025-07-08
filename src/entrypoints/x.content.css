@@ -20,6 +20,10 @@ header[role='banner'] {
 	}
 }
 
+[data-testid='GrokDrawer'] {
+	display: none !important;
+}
+
 [data-testid='sidebarColumn'] {
 	/* Subscribe to Premium */
 	[data-testid='super-upsell-UpsellCardRenderProperties'],
