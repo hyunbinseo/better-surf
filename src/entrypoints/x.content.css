@@ -30,10 +30,10 @@ header[role='banner'] {
 	:not(:first-child):has(> * > aside[role='complementary']),
 	:has(
 		> :is(
-				aside[role='complementary'],
-				section[aria-labelledby^='accessible-list-'],
-				nav[role='navigation']
-			)
+			aside[role='complementary'],
+			section[aria-labelledby^='accessible-list-'],
+			nav[role='navigation']
+		)
 	) {
 		display: none !important;
 	}
