@@ -13,7 +13,7 @@
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"format": "prettier --write .",
 		"postinstall": "wxt prepare",
-		"postversion": "git push && git push --tags"
+		"postversion": "git push && git push --tags && node cli/postversion.ts"
 	},
 	"devDependencies": {
 		"@tsconfig/svelte": "^5.0.4",
