@@ -20,9 +20,9 @@ export default defineContentScript({
 				}
 
 				const total = Number(totalString);
-				const supply = Math.ceil(total / 1.1); // 국세청 홈택스 로직
+				const vat = Math.round(total / 11);
 
-				input.value = supply.toString();
+				input.value = (total - vat).toString();
 			}
 		});
 	},
