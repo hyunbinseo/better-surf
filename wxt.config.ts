@@ -1,3 +1,5 @@
+import { globSync, readFileSync } from 'node:fs';
+import { basename } from 'node:path';
 import { env, loadEnvFile } from 'node:process';
 import { defineConfig } from 'wxt';
 
@@ -29,7 +31,35 @@ export default defineConfig({
 	],
 	autoIcons: { baseIconPath: './assets/icon.svg' },
 	hooks: {
+		'build:publicAssets': (wxt, assets) => {
+			if (wxt.config.browser === 'firefox') {
+				for (const path of globSync('./static/ff_*')) {
+					assets.push({
+						relativeDest: basename(path),
+						contents: readFileSync(path, 'utf-8'),
+					});
+				}
+			}
+		},
 		'build:manifestGenerated': (wxt, manifest) => {
+			if (wxt.config.browser === 'firefox') {
+				//
+				manifest.host_permissions ??= [];
+				manifest.host_permissions.push('*://*.swit.io/*');
+				//
+				manifest.permissions ??= [];
+				manifest.permissions.push('declarativeNetRequest');
+				//
+				manifest.declarative_net_request ??= {
+					rule_resources: [
+						{
+							id: 'ff_user_agent',
+							path: 'ff_user_agent.json',
+							enabled: true,
+						},
+					],
+				};
+			}
 			manifest.content_scripts ??= [];
 			manifest.content_scripts.push({
 				css: ['content-scripts/x.css'],
