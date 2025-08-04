@@ -14,7 +14,7 @@ export default defineConfig({
 			...(browser === 'firefox' && {
 				gecko: {
 					id: env.FIREFOX_EXTENSION_ID,
-					strict_min_version: '121.0', // CSS :has() support
+					strict_min_version: '121.0',
 				},
 				// To continue marking your extension as Android compatible on AMO,
 				// ensure that your manifest.json file includes a "browser_specific_settings.gecko_android" object.
@@ -23,7 +23,13 @@ export default defineConfig({
 			}),
 		},
 	}),
-	vite: () => ({ build: { cssTarget: ['firefox121'] } }),
+	vite: () => ({
+		build: {
+			cssTarget: ['firefox121'],
+			// Firefox 121 - CSS :has()
+			// Firefox 117 - CSS Nesting
+		},
+	}),
 	srcDir: 'src',
 	modules: [
 		'@wxt-dev/auto-icons', //
