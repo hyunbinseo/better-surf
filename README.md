@@ -22,10 +22,11 @@
 
 ## 제공 기능
 
-- Firefox 접속을 막은 웹사이트 우회 ([Swit] 등)
+- 링크 새 탭에서 열기 (세종문화회관, 퀘이사존 등)
 - X(트위터) 요소 숨기기 (Grok, Premium 등)
 - [뉴데일리]가 윤서인 씨 연재 매체임을 안내
 - [서울대학교 수강신청 시스템] 다중 접속 허용[^snu-sugang]
+- Firefox 접속을 막은 웹사이트 우회 ([Swit] 등)
 
 [Swit]: https://swit.io/
 [뉴데일리]: https://newdaily.co.kr/
