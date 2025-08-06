@@ -1,6 +1,6 @@
 [
 	{
-		"id": 1,
+		"id": 2,
 		"priority": 1,
 		"action": {
 			"type": "modifyHeaders",
@@ -8,12 +8,12 @@
 				{
 					"header": "User-Agent",
 					"operation": "set",
-					"value": "Mozilla/5.0 (; ; ) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+					"value": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
 				}
 			]
 		},
 		"condition": {
-			"urlFilter": "https://*.swit.io/*",
+			"urlFilter": "https://pocketcu.co.kr/*",
 			"resourceTypes": ["main_frame"]
 		}
 	}
