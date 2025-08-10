@@ -1,6 +1,8 @@
 # Better Surf
 
-주관적인(opinionated) 오픈소스 확장 프로그램. 개인정보를 수집하지 않습니다.
+주관적인(opinionated) 오픈소스 확장 프로그램[^privacy-notice]
+
+[^privacy-notice]: 개인정보를 수집하지 않습니다.
 
 <!-- https://developer.chrome.com/docs/webstore/branding -->
 <a href="https://chromewebstore.google.com/detail/better-surf/jhpnholkflkpnadabmadfcfgnbekijjf">
@@ -22,14 +24,20 @@
 
 ## 제공 기능
 
-- 링크 새 탭에서 열기 (세종문화회관, 퀘이사존 등)
-- 기계 번역 끄기 (reddit, 각종 구글 기술 문서 등)
-- X(트위터) 요소 숨기기 (Grok, Premium 등)
+| 구분                   | 적용 웹사이트 (예시)        |
+| ---------------------- | --------------------------- |
+| 기계 번역 비활성화     | Reddit, 구글 기술 문서      |
+| 링크 새 탭에서 열기    | 세종문화회관, 퀘이사존 핫딜 |
+| 모바일 웹사이트 표시   | 포켓CU                      |
+| 불필요한 요소 숨김     | X/트위터 - Grok, Premium    |
+| 자바스크립트 링크 제거 | 퀘이사존 핫딜               |
+| Firefox 접속 차단 우회 | [Swit](https://swit.io/)    |
+
+## 기타 기능
+
 - [뉴데일리]가 윤서인 씨 연재 매체임을 안내
 - [서울대학교 수강신청 시스템] 다중 접속 허용[^snu-sugang]
-- Firefox 접속을 막은 웹사이트 우회 ([Swit] 등)
 
-[Swit]: https://swit.io/
 [뉴데일리]: https://newdaily.co.kr/
 [서울대학교 수강신청 시스템]: https://sugang.snu.ac.kr/
 
