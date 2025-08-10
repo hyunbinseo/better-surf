@@ -1,5 +1,6 @@
 export default defineContentScript({
 	matches: ['https://webapp.moneypin.biz/*'],
+	runAt: 'document_start',
 	main: () => {
 		const url = new URL(window.location.href);
 		url.hostname = 'web.moneypin.biz';

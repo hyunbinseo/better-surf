@@ -3,6 +3,7 @@ export default defineContentScript({
 		'https://quasarzone.com/bbs/qb_saleinfo', //
 		'https://quasarzone.com/bbs/qb_saleinfo?*',
 	],
+	runAt: 'document_end',
 	main: () => {
 		const isMobile = !!document.querySelector('header#top-header');
 		if (!isMobile) return;

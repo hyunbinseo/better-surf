@@ -1,5 +1,6 @@
 export default defineContentScript({
 	matches: ['https://quasarzone.com/bbs/qb_saleinfo/views/*'],
+	runAt: 'document_end',
 	main: () => {
 		document
 			.querySelectorAll<HTMLAnchorElement>(
