@@ -1,0 +1,9 @@
+body.el-popup-parent--hidden {
+	overflow: visible !important;
+	overscroll-behavior: auto !important;
+}
+
+.v-modal,
+.el-dialog__wrapper.pop-ad-box {
+	display: none;
+}
