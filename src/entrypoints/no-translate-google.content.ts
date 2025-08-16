@@ -8,25 +8,18 @@ export default defineContentScript({
 		'https://web.dev/*',
 	],
 	runAt: 'document_start',
-	main:
-		// document.referrer is an empty string in Firefox.
-		import.meta.env.FIREFOX
-			? () => {
-					const url = new URL(window.location.href);
-					if (url.searchParams.has('hl') && window.confirm('Switch to English?')) {
-						document.cookie = 'django_language=en; path=/';
-						url.searchParams.delete('hl');
-						window.location.href = url.toString();
-					}
-				}
-			: () => {
-					if (!document.referrer) return;
-					const url = new URL(window.location.href);
-					const referrer = new URL(document.referrer);
-					if (url.hostname !== referrer.hostname && url.searchParams.has('hl')) {
-						document.cookie = 'django_language=en; path=/';
-						url.searchParams.delete('hl');
-						window.location.href = url.toString();
-					}
-				},
+	main: async () => {
+		const url = new URL(window.location.href);
+		const referrer = new URL(document.referrer);
+
+		// referrer is an empty string in Firefox.
+		const switchToEnglish = import.meta.env.FIREFOX
+			? url.searchParams.has('hl') && window.confirm('Switch to English?')
+			: url.hostname !== referrer.hostname && url.searchParams.has('hl');
+
+		if (!switchToEnglish) return;
+		await cookieStore.set('django_language', 'en');
+		url.searchParams.delete('hl');
+		window.location.href = url.toString();
+	},
 });
