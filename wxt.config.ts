@@ -26,7 +26,7 @@ export default defineConfig({
 				...(browser === 'firefox' && {
 					gecko: {
 						id: env.FIREFOX_EXTENSION_ID,
-						strict_min_version: '121.0',
+						strict_min_version: '140.0', // https://developer.mozilla.org/en-US/docs/Web/API/CookieStore
 					},
 					// To continue marking your extension as Android compatible on AMO,
 					// ensure that your manifest.json file includes a "browser_specific_settings.gecko_android" object.
