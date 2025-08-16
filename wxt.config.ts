@@ -71,12 +71,5 @@ export default defineConfig({
 				}
 			}
 		},
-		'build:manifestGenerated': (wxt, manifest) => {
-			manifest.content_scripts ??= [];
-			manifest.content_scripts.push({
-				css: ['content-scripts/x.css'],
-				matches: ['https://x.com/*'],
-			});
-		},
 	},
 });
