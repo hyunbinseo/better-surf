@@ -1,0 +1,11 @@
+[
+	{
+		"id": 3,
+		"priority": 1,
+		"action": { "type": "block" },
+		"condition": {
+			"urlFilter": "https://www.epost.go.kr/nonActiveX/*",
+			"resourceTypes": ["script"]
+		}
+	}
+]

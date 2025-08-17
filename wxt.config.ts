@@ -11,10 +11,18 @@ export default defineConfig({
 		const manifest = {
 			name: 'Better Surf',
 			description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
-			host_permissions: ['https://pocketcu.co.kr/*'],
+			host_permissions: [
+				'https://*.epost.go.kr/*', //
+				'https://pocketcu.co.kr/*',
+			],
 			permissions: ['declarativeNetRequest'],
 			declarative_net_request: {
 				rule_resources: [
+					{
+						id: 'block_security_modules',
+						path: 'block_security_modules.json',
+						enabled: true,
+					},
 					{
 						id: 'mobile_user_agent',
 						path: 'mobile_user_agent.json',
