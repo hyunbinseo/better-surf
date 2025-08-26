@@ -67,7 +67,10 @@ export default defineConfig({
 		'@wxt-dev/auto-icons', //
 		'@wxt-dev/module-svelte',
 	],
-	autoIcons: { baseIconPath: './assets/icon.svg' },
+	autoIcons: {
+		baseIconPath: './assets/icon.svg',
+		developmentIndicator: 'overlay',
+	},
 	hooks: {
 		'build:publicAssets': (wxt, assets) => {
 			if (wxt.config.browser === 'firefox') {
