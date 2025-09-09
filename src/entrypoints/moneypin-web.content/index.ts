@@ -1,4 +1,4 @@
-import { digits, nonEmpty, pipe, safeParse, string, transform } from 'valibot';
+import { digits, nonEmpty, pipe, regex, safeParse, string, transform } from 'valibot';
 import './style.css';
 
 export default defineContentScript({
@@ -19,7 +19,8 @@ export default defineContentScript({
 					pipe(
 						string(),
 						nonEmpty(),
-						transform((v) => v.trim().replace(/원$/, '').replaceAll(',', '')),
+						regex(/^ *₩?(?:\d+,)*\d+원? *$/),
+						transform((v) => v.trim().replaceAll(/[₩,원]/g, '')),
 						digits(),
 					),
 					totalString,
