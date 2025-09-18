@@ -12,8 +12,9 @@ export default defineConfig({
 			name: 'Better Surf',
 			description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
 			host_permissions: [
-				'https://*.epost.go.kr/*', //
+				'https://*.epost.go.kr/*',
 				'https://pocketcu.co.kr/*',
+				'https://www.nl.go.kr/*',
 			],
 			permissions: ['declarativeNetRequest'],
 			declarative_net_request: {
@@ -21,6 +22,11 @@ export default defineConfig({
 					{
 						id: 'block_security_modules',
 						path: 'block_security_modules.json',
+						enabled: true,
+					},
+					{
+						id: 'miscellaneous',
+						path: 'miscellaneous.json',
 						enabled: true,
 					},
 					{
