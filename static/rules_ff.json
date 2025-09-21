@@ -1,7 +1,6 @@
 [
 	{
-		"id": 1,
-		"priority": 1,
+		"id": 101,
 		"action": {
 			"type": "modifyHeaders",
 			"requestHeaders": [

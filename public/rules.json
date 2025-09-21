@@ -1,0 +1,44 @@
+[
+	{
+		"id": 3,
+		"action": {
+			"type": "modifyHeaders",
+			"requestHeaders": [
+				{
+					"header": "Referer",
+					"operation": "set",
+					"value": "https://www.nl.go.kr"
+				}
+			]
+		},
+		"condition": {
+			"urlFilter": "https://www.nl.go.kr/*",
+			"resourceTypes": ["main_frame"]
+		}
+	},
+	{
+		"id": 2,
+		"action": { "type": "block" },
+		"condition": {
+			"urlFilter": "https://www.epost.go.kr/nonActiveX/*",
+			"resourceTypes": ["script"]
+		}
+	},
+	{
+		"id": 1,
+		"action": {
+			"type": "modifyHeaders",
+			"requestHeaders": [
+				{
+					"header": "User-Agent",
+					"operation": "set",
+					"value": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+				}
+			]
+		},
+		"condition": {
+			"urlFilter": "https://pocketcu.co.kr/*",
+			"resourceTypes": ["main_frame"]
+		}
+	}
+]
