@@ -1,5 +1,22 @@
 [
 	{
+		"id": 4,
+		"action": {
+			"type": "modifyHeaders",
+			"requestHeaders": [
+				{
+					"header": "Referer",
+					"operation": "set",
+					"value": "https://store.hancom.com/"
+				}
+			]
+		},
+		"condition": {
+			"urlFilter": "https://cdn.hancom.com/*",
+			"resourceTypes": ["main_frame"]
+		}
+	},
+	{
 		"id": 3,
 		"action": {
 			"type": "modifyHeaders",

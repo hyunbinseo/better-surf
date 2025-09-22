@@ -12,6 +12,7 @@ export default defineConfig({
 		description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
 		host_permissions: [
 			'https://*.epost.go.kr/*',
+			'https://cdn.hancom.com/*',
 			'https://pocketcu.co.kr/*',
 			'https://www.nl.go.kr/*',
 		],
