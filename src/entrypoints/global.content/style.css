@@ -1,0 +1,4 @@
+iframe[src^="https://accounts.google.com/gsi/iframe/select?"]
+{
+	display: none;
+}
