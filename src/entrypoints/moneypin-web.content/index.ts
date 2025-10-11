@@ -36,14 +36,17 @@ const 세금계산서_작성 = async () => {
 		return;
 	}
 
-	const total = Number(parsed.output);
-	const vat = Math.round(total / 11);
+	const 합계 = Number(parsed.output);
+	const 부가세 = Math.round(합계 / 11);
+	const 공급가액 = 합계 - 부가세;
 
-	input.value = (total - vat).toString();
+	input.value = 공급가액.toString();
 
 	await new Promise((resolve) => setTimeout(resolve, 100));
 	input.focus();
 
 	await new Promise((resolve) => setTimeout(resolve, 100));
 	document.querySelector<HTMLInputElement>('input[placeholder^="품목명"]')?.focus();
+
+	if (공급가액 + 부가세 !== 합계) window.alert('합계가 맞도록 부가세를 수정하세요.');
 };
