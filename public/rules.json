@@ -1,5 +1,52 @@
 [
 	{
+		"id": 6,
+		"action": {
+			"type": "redirect",
+			"redirect": {
+				"transform": {
+					"queryTransform": {
+						"removeParams": ["si"]
+					}
+				}
+			}
+		},
+		"condition": {
+			"regexFilter": "^https://((www\\.)?youtube\\.com|youtu\\.be)/",
+			"resourceTypes": ["main_frame"]
+		}
+	},
+	{
+		"id": 5,
+		"action": {
+			"type": "redirect",
+			"redirect": {
+				"transform": {
+					"queryTransform": {
+						"removeParams": [
+							"ad_id",
+							"campaign_id",
+							"cid",
+							"fbclid",
+							"gclid",
+							"igshid",
+							"utm_campaign",
+							"utm_content",
+							"utm_id",
+							"utm_medium",
+							"utm_source",
+							"utm_term"
+						]
+					}
+				}
+			}
+		},
+		"condition": {
+			"urlFilter": "*",
+			"resourceTypes": ["main_frame"]
+		}
+	},
+	{
 		"id": 4,
 		"action": {
 			"type": "modifyHeaders",

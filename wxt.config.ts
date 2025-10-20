@@ -15,6 +15,9 @@ export default defineConfig({
 			'https://cdn.hancom.com/*',
 			'https://pocketcu.co.kr/*',
 			'https://www.nl.go.kr/*',
+			'https://www.youtube.com/*',
+			'https://youtu.be/*',
+			'https://youtube.com/*',
 		],
 		permissions: ['declarativeNetRequest'],
 		declarative_net_request: {
