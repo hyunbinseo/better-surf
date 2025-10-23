@@ -20,6 +20,7 @@ export default defineContentScript({
 				url.searchParams.has('hl');
 
 		if (!switchToEnglish) return;
+
 		await cookieStore.set('django_language', 'en');
 		url.searchParams.delete('hl');
 		window.location.href = url.toString();
