@@ -1,0 +1,26 @@
+export const FIREFOX_RULE_ID_OFFSET = 100;
+
+export const firefoxRules: chrome.declarativeNetRequest.Rule[] = [
+	{
+		id: 0,
+		action: {
+			type: 'modifyHeaders',
+			requestHeaders: [
+				{
+					header: 'User-Agent',
+					operation: 'set',
+					value:
+						'Mozilla/5.0 (; ; ) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+				},
+			],
+		},
+		condition: {
+			urlFilter: 'https://*.swit.io/*',
+			resourceTypes: ['main_frame'],
+		},
+	},
+];
+
+firefoxRules.forEach((rule, index) => {
+	rule.id = FIREFOX_RULE_ID_OFFSET + firefoxRules.length - index;
+});

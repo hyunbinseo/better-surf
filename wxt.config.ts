@@ -1,12 +1,13 @@
-import { readFileSync } from 'node:fs';
-import { basename, join } from 'node:path';
 import { env, loadEnvFile } from 'node:process';
 import { defineConfig } from 'wxt';
+import { rules } from './utilities/declarativeNetRequest/common';
+import { firefoxRules } from './utilities/declarativeNetRequest/firefox';
 
 loadEnvFile();
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
+	// Reference https://developer.chrome.com/docs/extensions/reference/manifest
 	manifest: ({ browser }) => ({
 		name: 'Better Surf',
 		description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
@@ -20,6 +21,7 @@ export default defineConfig({
 			'https://youtube.com/*',
 		],
 		permissions: ['declarativeNetRequest'],
+		// Reference https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest
 		declarative_net_request: {
 			rule_resources: [
 				{
@@ -61,18 +63,21 @@ export default defineConfig({
 				// FIXME Inferred as any, not as string[] | undefined.
 				manifest.host_permissions.push('https://*.swit.io/*');
 				manifest.declarative_net_request.rule_resources.push({
-					id: 'rules_ff',
-					path: 'rules_ff.json',
+					id: 'rules-firefox',
+					path: 'rules-firefox.json',
 					enabled: true,
 				});
 			}
 		},
 		'build:publicAssets': (wxt, assets) => {
+			assets.push({
+				relativeDest: 'rules.json',
+				contents: JSON.stringify(rules),
+			});
 			if (wxt.config.browser === 'firefox') {
-				const path = join(import.meta.dirname, './static/rules_ff.json');
 				assets.push({
-					relativeDest: basename(path),
-					contents: readFileSync(path, { encoding: 'utf-8' }),
+					relativeDest: 'rules-firefox.json',
+					contents: JSON.stringify(firefoxRules),
 				});
 			}
 		},

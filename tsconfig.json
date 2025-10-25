@@ -1,6 +1,7 @@
 {
 	"extends": "./.wxt/tsconfig.json",
 	"compilerOptions": {
+		"types": ["chrome-types"],
 		"useDefineForClassFields": true
 	}
 }
