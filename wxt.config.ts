@@ -14,6 +14,7 @@ export default defineConfig({
 		host_permissions: [
 			'https://*.epost.go.kr/*',
 			'https://cdn.hancom.com/*',
+			'https://member.navienhouse.com/*',
 			'https://pocketcu.co.kr/*',
 			'https://www.nl.go.kr/*',
 			'https://www.youtube.com/*',

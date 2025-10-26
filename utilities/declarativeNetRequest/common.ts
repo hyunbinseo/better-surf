@@ -4,6 +4,39 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
 		action: {
+			type: 'modifyHeaders',
+			responseHeaders: [
+				{
+					header: 'access-control-allow-credentials',
+					operation: 'set',
+					value: 'true',
+				},
+				{
+					header: 'access-control-allow-headers',
+					operation: 'set',
+					value: '*',
+				},
+				{
+					header: 'access-control-allow-methods',
+					operation: 'set',
+					value: '*',
+				},
+				{
+					header: 'access-control-allow-origin',
+					operation: 'set',
+					value: 'https://hyunb.in',
+				},
+			],
+		},
+		condition: {
+			initiatorDomains: ['hyunb.in'],
+			urlFilter: 'https://member.navienhouse.com/*',
+			resourceTypes: ['xmlhttprequest'],
+		},
+	},
+	{
+		id: 0,
+		action: {
 			type: 'redirect',
 			redirect: {
 				transform: {
