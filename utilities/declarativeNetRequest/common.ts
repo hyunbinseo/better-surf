@@ -21,36 +21,6 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
 		action: {
-			type: 'redirect',
-			redirect: {
-				transform: {
-					queryTransform: {
-						removeParams: [
-							'ad_id',
-							'campaign_id',
-							'cid',
-							'fbclid',
-							'gclid',
-							'igshid',
-							'utm_campaign',
-							'utm_content',
-							'utm_id',
-							'utm_medium',
-							'utm_source',
-							'utm_term',
-						],
-					},
-				},
-			},
-		},
-		condition: {
-			urlFilter: '*',
-			resourceTypes: ['main_frame'],
-		},
-	},
-	{
-		id: 0,
-		action: {
 			type: 'modifyHeaders',
 			requestHeaders: [
 				{
