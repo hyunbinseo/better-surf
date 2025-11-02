@@ -2,6 +2,7 @@ import { env, loadEnvFile } from 'node:process';
 import { defineConfig } from 'wxt';
 import { rules } from './utilities/declarativeNetRequest/common';
 import { firefoxRules } from './utilities/declarativeNetRequest/firefox';
+import tailwindcss from '@tailwindcss/vite';
 
 loadEnvFile();
 
@@ -21,7 +22,7 @@ export default defineConfig({
 			'https://youtu.be/*',
 			'https://youtube.com/*',
 		],
-		permissions: ['declarativeNetRequest'],
+		permissions: ['declarativeNetRequest', 'tabs'],
 		// Reference https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest
 		declarative_net_request: {
 			rule_resources: [
@@ -48,6 +49,7 @@ export default defineConfig({
 	vite: () => ({
 		// Reference https://caniuse.com/css-nesting
 		build: { cssTarget: ['firefox117'] },
+		plugins: [tailwindcss()],
 	}),
 	srcDir: 'src',
 	modules: [
