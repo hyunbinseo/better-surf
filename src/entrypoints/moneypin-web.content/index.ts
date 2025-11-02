@@ -5,7 +5,7 @@ export default defineContentScript({
 	matches: ['https://web.moneypin.biz/*'],
 	main: (ctx) => {
 		ctx.addEventListener(window, 'wxt:locationchange', ({ newUrl: url }) => {
-			if (url.pathname === '/bill/input') return 세금계산서_작성();
+			if (url.pathname === '/bill/input') 세금계산서_작성();
 		});
 	},
 });

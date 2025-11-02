@@ -2,6 +2,15 @@
 	"extends": "./.wxt/tsconfig.json",
 	"compilerOptions": {
 		"types": ["chrome-types"],
-		"useDefineForClassFields": true
+		"useDefineForClassFields": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false
 	}
 }
