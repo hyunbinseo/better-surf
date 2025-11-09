@@ -1,5 +1,5 @@
 export default defineContentScript({
-	matches: ['https://learn.microsoft.com/ko-kr/*'],
+	matches: ['https://ko.vite.dev/guide/*'],
 	runAt: 'document_start',
 	main: () => {
 		const url = new URL(window.location.href);
@@ -12,7 +12,7 @@ export default defineContentScript({
 
 		if (!switchToEnglish) return;
 
-		url.pathname = url.pathname.replace(/^\/ko-kr\//, '/en-us/');
+		url.hostname = 'vite.dev';
 		window.location.href = url.toString();
 	},
 });
