@@ -11,7 +11,7 @@ export default defineContentScript({
 	main: async () => {
 		const url = new URL(window.location.href);
 
-		// referrer is an empty string in Firefox.
+		// referrer is an empty string in Firefox
 		const switchToEnglish = import.meta.env.FIREFOX
 			? url.searchParams.has('hl') && //
 				window.confirm('Switch to English?')

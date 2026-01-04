@@ -1,4 +1,3 @@
-iframe[src^="https://accounts.google.com/gsi/iframe/select?"]
-{
+iframe[src^='https://accounts.google.com/gsi/iframe/select?'] {
 	display: none;
 }
