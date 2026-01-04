@@ -4,6 +4,8 @@ export default defineContentScript({
 	main: () => {
 		const url = new URL(window.location.href);
 
+		if (url.pathname.startsWith('/ko-kr/answers/questions/')) return; // locale mismatch
+
 		// referrer is an empty string in Firefox
 		const switchToEnglish = import.meta.env.FIREFOX
 			? window.confirm('Switch to English?')
