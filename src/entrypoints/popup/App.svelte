@@ -15,10 +15,10 @@
 	</label>
 	{#if value === 'qr'}
 		{#await browser.tabs.query({ active: true, currentWindow: true }) then tabs}
-			{@const tab = tabs[0]}
-			{#if tab && tab.url}
+			{@const url = tabs[0]?.url}
+			{#if url && (url.startsWith('https://') || url.startsWith('http://'))}
 				{@html new QRCode({
-					content: tab.url,
+					content: url,
 					padding: 0,
 					ecl: 'M',
 					join: true,
