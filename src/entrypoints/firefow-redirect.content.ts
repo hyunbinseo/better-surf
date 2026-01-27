@@ -1,6 +1,11 @@
 export default defineContentScript({
 	include: ['firefox'],
-	matches: ['https://gift-talk.kakao.com/appredirect?*'],
+	matches: [
+		// https://gift-talk.kakao.com/appredirect?to=
+		'https://gift-talk.kakao.com/appredirect?to=*',
+		// https://shoppinglive.kakao.com/bridge?redirect=
+		'https://shoppinglive.kakao.com/bridge?redirect=*',
+	],
 	runAt: 'document_start',
 	main: () => {
 		if (!navigator.userAgent.startsWith('Mozilla/5.0 (Android')) return;
