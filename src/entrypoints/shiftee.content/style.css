@@ -1,0 +1,5 @@
+ul.sft-side-nav-container {
+	> li:has(> a.sft-disabled) {
+		display: none;
+	}
+}
