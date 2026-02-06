@@ -1,5 +1,5 @@
 export default defineContentScript({
-	matches: ['https://ko.vite.dev/guide/*'],
+	matches: ['https://ko.vite.dev/*'],
 	runAt: 'document_start',
 	main: () => {
 		const url = new URL(window.location.href);
