@@ -3,6 +3,14 @@ import { FIREFOX_RULE_ID_OFFSET } from './firefox';
 export const rules: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
+		action: { type: 'block' },
+		condition: {
+			urlFilter: 'https://buttr.dev/*',
+			resourceTypes: ['script', 'sub_frame'],
+		},
+	},
+	{
+		id: 0,
 		action: {
 			type: 'modifyHeaders',
 			responseHeaders: [
