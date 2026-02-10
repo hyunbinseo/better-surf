@@ -1,3 +1,10 @@
 iframe[src^='https://accounts.google.com/gsi/iframe/select?'] {
 	display: none;
 }
+
+/* 코드앤버터 */
+cb-embedded {
+	filter: grayscale(1);
+	opacity: 20%;
+	pointer-events: none;
+}
