@@ -28,13 +28,13 @@
 		"prettier-plugin-svelte": "^3.4.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"qrcode-svg": "^1.1.0",
-		"svelte": "^5.50.3",
-		"svelte-check": "^4.3.6",
+		"svelte": "^5.51.1",
+		"svelte-check": "^4.4.0",
 		"tailwindcss": "^4.1.18",
 		"tslib": "^2.8.1",
 		"typescript": "^5.9.3",
 		"valibot": "^1.2.0",
-		"wxt": "^0.20.13"
+		"wxt": "0.20.16"
 	},
 	"author": "Hyunbin Seo",
 	"license": "MIT",
