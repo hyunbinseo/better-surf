@@ -17,24 +17,24 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.11",
-		"@tailwindcss/vite": "^4.1.18",
-		"@tsconfig/svelte": "^5.0.7",
+		"@tailwindcss/vite": "^4.2.0",
+		"@tsconfig/svelte": "^5.0.8",
 		"@types/node": "^24.10.13",
 		"@types/qrcode-svg": "^1.1.5",
 		"@wxt-dev/auto-icons": "^1.1.0",
 		"@wxt-dev/module-svelte": "^2.0.4",
 		"chrome-types": "^0.1.415",
 		"prettier": "^3.8.1",
-		"prettier-plugin-svelte": "^3.4.1",
+		"prettier-plugin-svelte": "^3.5.0",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"qrcode-svg": "^1.1.0",
-		"svelte": "^5.51.1",
-		"svelte-check": "^4.4.0",
-		"tailwindcss": "^4.1.18",
+		"svelte": "^5.53.0",
+		"svelte-check": "^4.4.1",
+		"tailwindcss": "^4.2.0",
 		"tslib": "^2.8.1",
 		"typescript": "^5.9.3",
 		"valibot": "^1.2.0",
-		"wxt": "0.20.16"
+		"wxt": "^0.20.17"
 	},
 	"author": "Hyunbin Seo",
 	"license": "MIT",
@@ -46,5 +46,5 @@
 		"url": "https://github.com/hyunbinseo/better-surf/issues"
 	},
 	"homepage": "https://github.com/hyunbinseo/better-surf#readme",
-	"packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
+	"packageManager": "pnpm@10.30.0+sha512.2b5753de015d480eeb88f5b5b61e0051f05b4301808a82ec8b840c9d2adf7748eb352c83f5c1593ca703ff1017295bc3fdd3119abb9686efc96b9fcb18200937"
 }
