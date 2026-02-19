@@ -17,7 +17,6 @@ export default defineConfig({
 			'https://buttr.dev/*',
 			'https://cdn.hancom.com/*',
 			'https://member.navienhouse.com/*',
-			'https://pocketcu.co.kr/*',
 			'https://www.nl.go.kr/*',
 			'https://www.youtube.com/*',
 			'https://youtu.be/*',
