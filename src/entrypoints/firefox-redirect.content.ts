@@ -1,9 +1,8 @@
 export default defineContentScript({
 	include: ['firefox'],
 	matches: [
-		// https://gift-talk.kakao.com/appredirect?to=
 		'https://gift-talk.kakao.com/appredirect?to=*',
-		// https://shoppinglive.kakao.com/bridge?redirect=
+		'https://qr.kakaopay.com/*',
 		'https://shoppinglive.kakao.com/bridge?redirect=*',
 	],
 	runAt: 'document_start',
