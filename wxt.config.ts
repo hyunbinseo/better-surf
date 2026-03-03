@@ -1,10 +1,18 @@
 import tailwindcss from '@tailwindcss/vite';
-import { env, loadEnvFile } from 'node:process';
+import { loadEnvFile } from 'node:process';
+import { object, parse, pipe, string, uuid } from 'valibot';
 import { defineConfig } from 'wxt';
 import { rules } from './utilities/declarativeNetRequest/common';
 import { firefoxRules } from './utilities/declarativeNetRequest/firefox';
 
 loadEnvFile();
+
+const env = parse(
+	object({
+		FIREFOX_EXTENSION_UUID: pipe(string(), uuid()),
+	}),
+	process.env,
+);
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
@@ -36,7 +44,7 @@ export default defineConfig({
 		browser_specific_settings: {
 			...(browser === 'firefox' && {
 				gecko: {
-					id: env.FIREFOX_EXTENSION_ID,
+					id: `{${env.FIREFOX_EXTENSION_UUID}}`,
 					strict_min_version: '140.0', // https://developer.mozilla.org/en-US/docs/Web/API/CookieStore
 				},
 				// Mark the extension as Android compatible on AMO (addons.mozilla.org)
