@@ -4,6 +4,8 @@ import './style.css';
 export default defineContentScript({
 	matches: ['https://web.moneypin.biz/*'],
 	main: (ctx) => {
+		ctx.addEventListener(window, 'beforeunload', (e) => e.preventDefault());
+
 		ctx.addEventListener(window, 'wxt:locationchange', ({ newUrl: url }) => {
 			if (url.pathname === '/bill/input') 세금계산서_작성();
 		});
@@ -24,7 +26,7 @@ const 세금계산서_작성 = async () => {
 		pipe(
 			string(),
 			nonEmpty(),
-			regex(/^ *₩?(?:\d+,)*\d+원? *$/),
+			regex(/^\s*₩?(?:\d+,)*\d+원?\s*$/),
 			transform((v) => v.trim().replaceAll(/[₩,원]/g, '')),
 			digits(),
 		),
