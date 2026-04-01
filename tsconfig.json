@@ -1,16 +1,31 @@
 {
 	"extends": "./.wxt/tsconfig.json",
 	"compilerOptions": {
-		"types": ["chrome-types"],
-		"useDefineForClassFields": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitOverride": true,
-		"noImplicitReturns": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
+		"types": ["chrome-types", "node"],
+
+		// Stricter Typechecking Options
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
+
+		// Style Options
+		"noImplicitReturns": true,
+		"noImplicitOverride": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noPropertyAccessFromIndexSignature": false,
+
+		// Added
 		"allowUnreachableCode": false,
-		"allowUnusedLabels": false
-	}
+		"allowUnusedLabels": false,
+
+		// Recommended Options
+		"strict": true,
+		"jsx": "react-jsx",
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"noUncheckedSideEffectImports": true,
+		"moduleDetection": "force",
+		"skipLibCheck": true,
+	},
 }
