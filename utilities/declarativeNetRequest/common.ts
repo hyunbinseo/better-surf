@@ -3,6 +3,23 @@ import { FIREFOX_RULE_ID_OFFSET } from './firefox';
 export const rules: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
+		action: {
+			type: 'redirect',
+			redirect: {
+				transform: {
+					queryTransform: {
+						addOrReplaceParams: [{ key: 'name', value: 'orig' }],
+					},
+				},
+			},
+		},
+		condition: {
+			urlFilter: 'https://pbs.twimg.com/media/*?format=*',
+			resourceTypes: ['main_frame'],
+		},
+	},
+	{
+		id: 0,
 		action: { type: 'block' },
 		condition: {
 			urlFilter: 'https://buttr.dev/*',
