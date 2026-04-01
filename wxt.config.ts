@@ -24,7 +24,6 @@ export default defineConfig({
 			'https://*.epost.go.kr/*',
 			'https://buttr.dev/*',
 			'https://cdn.hancom.com/*',
-			'https://member.navienhouse.com/*',
 			'https://www.nl.go.kr/*',
 			'https://www.youtube.com/*',
 			'https://youtu.be/*',
