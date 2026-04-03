@@ -6,8 +6,8 @@ export default defineContentScript({
 	main: (ctx) => {
 		ctx.addEventListener(window, 'beforeunload', (e) => e.preventDefault());
 
-		ctx.addEventListener(window, 'wxt:locationchange', ({ newUrl: url }) => {
-			if (url.pathname === '/bill/input') 세금계산서_작성();
+		ctx.addEventListener(window, 'wxt:locationchange', ({ newUrl }) => {
+			if (newUrl.pathname === '/bill/input') 세금계산서_작성();
 		});
 	},
 });

@@ -1,3 +1,11 @@
+const redirect = (url: URL) => {
+	if (!navigator.userAgent.startsWith('Mozilla/5.0 (Android')) return;
+	url.hash = `#Intent;scheme=${url.protocol.slice(0, -1)};package=com.android.chrome;end`;
+	// Cannot be changed using the URL protocol property
+	// See https://github.com/whatwg/url/issues/674
+	window.location.href = 'intent:' + url.href.slice(url.protocol.length);
+};
+
 export default defineContentScript({
 	include: ['firefox'],
 	matches: [
@@ -6,12 +14,8 @@ export default defineContentScript({
 		'https://shoppinglive.kakao.com/bridge?redirect=*',
 	],
 	runAt: 'document_start',
-	main: () => {
-		if (!navigator.userAgent.startsWith('Mozilla/5.0 (Android')) return;
-		const url = new URL(window.location.href);
-		url.hash = `#Intent;scheme=${url.protocol.slice(0, -1)};package=com.android.chrome;end`;
-		// Cannot be changed using the URL protocol property
-		// See https://github.com/whatwg/url/issues/674
-		window.location.href = 'intent:' + url.href.slice(url.protocol.length);
+	main: (ctx) => {
+		redirect(new URL(window.location.href));
+		ctx.addEventListener(window, 'wxt:locationchange', ({ newUrl }) => redirect(newUrl));
 	},
 });
