@@ -5,3 +5,7 @@
 #webapp-banner {
 	display: none;
 }
+
+ion-popover[aria-modal='true']:has(#moneypinPlusExpectedInClaimPopoverGoPage) {
+	display: none;
+}
