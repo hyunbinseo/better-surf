@@ -46,6 +46,8 @@ export default defineConfig({
 				gecko: {
 					id: `{${env.FIREFOX_EXTENSION_UUID}}`,
 					strict_min_version: '140.0', // https://developer.mozilla.org/en-US/docs/Web/API/CookieStore
+					// See https://extensionworkshop.com/documentation/develop/firefox-builtin-data-consent
+					data_collection_permissions: { required: ['none'] },
 				},
 				// Mark the extension as Android compatible on AMO (addons.mozilla.org)
 				// See https://blog.mozilla.org/addons/2023/10/05/changes-to-android-extension-signing
