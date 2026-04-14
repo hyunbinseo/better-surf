@@ -1,11 +1,12 @@
 import tailwindcss from '@tailwindcss/vite';
+import { resolve } from 'node:path';
 import { loadEnvFile } from 'node:process';
 import { object, parse, pipe, string, uuid } from 'valibot';
 import { defineConfig } from 'wxt';
 import { rules } from './utilities/declarativeNetRequest/common';
 import { firefoxRules } from './utilities/declarativeNetRequest/firefox';
 
-loadEnvFile();
+loadEnvFile(resolve(import.meta.dirname, '.env.submit'));
 
 const env = parse(
 	object({
