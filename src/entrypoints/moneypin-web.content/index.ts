@@ -6,15 +6,49 @@ export default defineContentScript({
 	main: (ctx) => {
 		ctx.addEventListener(window, 'beforeunload', (e) => e.preventDefault());
 
+		let abortController: AbortController | null = null;
+
 		ctx.addEventListener(window, 'wxt:locationchange', ({ newUrl }) => {
-			if (newUrl.pathname === '/bill/input') 세금계산서_작성();
+			abortController?.abort();
+			abortController = null;
+
+			if (newUrl.pathname === '/bill/input') {
+				abortController = new AbortController();
+				세금계산서_작성(abortController.signal);
+			}
 		});
 	},
 });
 
-const 세금계산서_작성 = async () => {
-	const input = document.querySelector<HTMLInputElement>('input[placeholder="0원"]');
-	if (!input) return;
+const 세금계산서_작성 = async (signal: AbortSignal) => {
+	const selectInput = () => document.querySelector<HTMLInputElement>('input[placeholder="0원"]');
+
+	const input = await new Promise<HTMLInputElement | void>((resolve) => {
+		const el = selectInput();
+		if (el) return resolve(el);
+
+		const observer = new MutationObserver(() => {
+			const el = selectInput();
+			if (el) {
+				observer.disconnect();
+				resolve(el);
+			}
+		});
+
+		observer.observe(document.body, { childList: true, subtree: true });
+
+		signal.addEventListener(
+			'abort',
+			() => {
+				observer.disconnect();
+				resolve();
+			},
+			{ once: true },
+		);
+	});
+
+	if (!input || signal.aborted) return;
+	await new Promise((resolve) => setTimeout(resolve, 100));
 
 	const isTotal = window.confirm('부가세 포함으로 발행하겠습니까?');
 	if (!isTotal) return;
