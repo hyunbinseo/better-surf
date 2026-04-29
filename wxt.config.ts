@@ -75,7 +75,7 @@ export default defineConfig({
 			if (wxt.config.browser === 'firefox') {
 				// FIXME Inferred as any, not as string[] | undefined
 				manifest.host_permissions.push('https://*.swit.io/*');
-				manifest.declarative_net_request.rule_resources.push({
+				manifest.declarative_net_request?.rule_resources?.push({
 					id: 'rules-firefox',
 					path: 'rules-firefox.json',
 					enabled: true,
