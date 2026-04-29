@@ -4,6 +4,12 @@ body.el-popup-parent--hidden {
 }
 
 .v-modal,
-.el-dialog__wrapper.pop-ad-box {
+.el-dialog__wrapper,
+.el-drawer__wrapper {
+	display: none;
+}
+
+.grbDim,
+.groobeeWrapper_999999 {
 	display: none;
 }
