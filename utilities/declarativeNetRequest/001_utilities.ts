@@ -1,6 +1,7 @@
-import { FIREFOX_RULE_ID_OFFSET } from './firefox';
+const MIN_VALUE = 1;
+const MAX_VALUE = 100;
 
-export const rules: chrome.declarativeNetRequest.Rule[] = [
+export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
 		action: {
@@ -16,14 +17,6 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 		condition: {
 			urlFilter: 'https://pbs.twimg.com/media/*?format=*',
 			resourceTypes: ['main_frame'],
-		},
-	},
-	{
-		id: 0,
-		action: { type: 'block' },
-		condition: {
-			urlFilter: 'https://buttr.dev/*',
-			resourceTypes: ['script', 'sub_frame'],
 		},
 	},
 	{
@@ -87,6 +80,8 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 	},
 ];
 
-if (rules.length > FIREFOX_RULE_ID_OFFSET) throw new Error();
+if (rule_utilities.length > MAX_VALUE - MIN_VALUE + 1) throw new RangeError();
 
-rules.forEach((rule, index) => (rule.id = rules.length - index));
+for (const [index, rule] of rule_utilities.entries()) {
+	rule.id = MIN_VALUE + rule_utilities.length - index - 1;
+}

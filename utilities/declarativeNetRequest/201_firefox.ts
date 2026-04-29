@@ -1,6 +1,6 @@
-export const FIREFOX_RULE_ID_OFFSET = 100;
+const MIN_VALUE = 201;
 
-export const firefoxRules: chrome.declarativeNetRequest.Rule[] = [
+export const rule_firefox: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
 		action: {
@@ -21,6 +21,6 @@ export const firefoxRules: chrome.declarativeNetRequest.Rule[] = [
 	},
 ];
 
-firefoxRules.forEach((rule, index) => {
-	rule.id = FIREFOX_RULE_ID_OFFSET + firefoxRules.length - index;
-});
+for (const [index, rule] of rule_firefox.entries()) {
+	rule.id = MIN_VALUE + rule_firefox.length - index - 1;
+}

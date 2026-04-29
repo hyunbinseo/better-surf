@@ -3,8 +3,9 @@ import { resolve } from 'node:path';
 import { loadEnvFile } from 'node:process';
 import { object, parse, pipe, string, uuid } from 'valibot';
 import { defineConfig } from 'wxt';
-import { rules } from './utilities/declarativeNetRequest/common';
-import { firefoxRules } from './utilities/declarativeNetRequest/firefox';
+import { rule_utilities } from './utilities/declarativeNetRequest/001_utilities';
+import { rule_bloats } from './utilities/declarativeNetRequest/101_bloats';
+import { rule_firefox } from './utilities/declarativeNetRequest/201_firefox';
 
 loadEnvFile(resolve(import.meta.dirname, '.env.submit'));
 
@@ -22,6 +23,8 @@ export default defineConfig({
 		name: 'Better Surf',
 		description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
 		host_permissions: [
+			'https://*.abr.ge/*',
+			'https://*.blux.ai/*',
 			'https://*.epost.go.kr/*',
 			'https://buttr.dev/*',
 			'https://cdn.hancom.com/*',
@@ -36,8 +39,13 @@ export default defineConfig({
 		declarative_net_request: {
 			rule_resources: [
 				{
-					id: 'rules',
-					path: 'rules.json',
+					id: 'utilities',
+					path: 'rules/utilities.json',
+					enabled: true,
+				},
+				{
+					id: 'bloats',
+					path: 'rules/bloats.json',
 					enabled: true,
 				},
 			],
@@ -76,21 +84,28 @@ export default defineConfig({
 				// FIXME Inferred as any, not as string[] | undefined
 				manifest.host_permissions.push('https://*.swit.io/*');
 				manifest.declarative_net_request?.rule_resources?.push({
-					id: 'rules-firefox',
-					path: 'rules-firefox.json',
+					id: 'firefox',
+					path: 'rules/firefox.json',
 					enabled: true,
 				});
 			}
 		},
 		'build:publicAssets': (wxt, assets) => {
-			assets.push({
-				relativeDest: 'rules.json',
-				contents: JSON.stringify(rules),
-			});
+			assets.push(
+				{
+					relativeDest: 'rules/utilities.json',
+					contents: JSON.stringify(rule_utilities),
+				},
+				{
+					relativeDest: 'rules/bloats.json',
+					contents: JSON.stringify(rule_bloats),
+				},
+			);
+
 			if (wxt.config.browser === 'firefox') {
 				assets.push({
-					relativeDest: 'rules-firefox.json',
-					contents: JSON.stringify(firefoxRules),
+					relativeDest: 'rules/firefox.json',
+					contents: JSON.stringify(rule_firefox),
 				});
 			}
 		},
