@@ -31,7 +31,7 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 			],
 		},
 		condition: {
-			urlFilter: 'https://www.youtube.com/tv',
+			urlFilter: '|https://www.youtube.com/tv^',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -48,7 +48,7 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
-			urlFilter: 'https://pbs.twimg.com/media/*?format=*',
+			urlFilter: '|https://pbs.twimg.com/media/*^format=*',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -82,7 +82,7 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 			],
 		},
 		condition: {
-			urlFilter: 'https://cdn.hancom.com/*',
+			urlFilter: '|https://cdn.hancom.com/*',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -99,7 +99,7 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 			],
 		},
 		condition: {
-			urlFilter: 'https://www.nl.go.kr/*',
+			urlFilter: '|https://www.nl.go.kr/*',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -107,7 +107,7 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 		id: 0,
 		action: { type: 'block' },
 		condition: {
-			urlFilter: 'https://www.epost.go.kr/nonActiveX/*',
+			urlFilter: '|https://www.epost.go.kr/nonActiveX/*',
 			resourceTypes: ['script'],
 		},
 	},

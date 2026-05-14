@@ -15,7 +15,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
-			urlFilter: 'https://www.youtube.com/redirect*',
+			urlFilter: '|https://www.youtube.com/redirect^*',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -23,7 +23,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 		id: 0,
 		action: { type: 'block' },
 		condition: {
-			urlFilter: 'https://*.blux.ai/*',
+			urlFilter: '|https://*.blux.ai/*',
 			resourceTypes: ['script', 'xmlhttprequest', 'sub_frame'],
 		},
 	},
@@ -32,7 +32,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 		action: { type: 'block' },
 		condition: {
 			// e.g. https://static.airbridge.io/sdk/latest/airbridge.min.js
-			urlFilter: 'https://*.abr.ge/*',
+			urlFilter: '|https://*.abr.ge/*',
 			resourceTypes: ['script', 'xmlhttprequest', 'sub_frame'],
 		},
 	},
@@ -40,7 +40,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 		id: 0,
 		action: { type: 'block' },
 		condition: {
-			urlFilter: 'https://buttr.dev/*',
+			urlFilter: '|https://buttr.dev/*',
 			resourceTypes: ['script', 'xmlhttprequest', 'sub_frame'],
 		},
 	},

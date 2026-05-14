@@ -15,7 +15,7 @@ export const rule_firefox: chrome.declarativeNetRequest.Rule[] = [
 			],
 		},
 		condition: {
-			urlFilter: 'https://*.swit.io/*',
+			urlFilter: '|https://*.swit.io/*',
 			resourceTypes: ['main_frame'],
 		},
 	},
