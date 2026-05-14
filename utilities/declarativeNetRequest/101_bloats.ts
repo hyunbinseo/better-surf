@@ -4,6 +4,23 @@ const MAX_VALUE = 200;
 export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
+		action: {
+			type: 'redirect',
+			redirect: {
+				transform: {
+					queryTransform: {
+						removeParams: ['redir_token'],
+					},
+				},
+			},
+		},
+		condition: {
+			urlFilter: 'https://www.youtube.com/redirect*',
+			resourceTypes: ['main_frame'],
+		},
+	},
+	{
+		id: 0,
 		action: { type: 'block' },
 		condition: {
 			urlFilter: 'https://*.blux.ai/*',
