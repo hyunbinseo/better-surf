@@ -5,6 +5,22 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
 		action: {
+			type: 'redirect',
+			redirect: {
+				// https://www.youtube.com/watch?v=RZ5OtdsXBsg
+				regexSubstitution: 'https://www.youtube.com/watch?v=\\1',
+			},
+		},
+		condition: {
+			// https://youtube.com/shorts/RZ5OtdsXBsg
+			// https://www.youtube.com/shorts/RZ5OtdsXBsg
+			regexFilter: '^https://(?:www\\.)?youtube\\.com/shorts/([a-zA-Z0-9_-]+)',
+			resourceTypes: ['main_frame'],
+		},
+	},
+	{
+		id: 0,
+		action: {
 			type: 'modifyHeaders',
 			requestHeaders: [
 				{
