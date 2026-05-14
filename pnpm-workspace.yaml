@@ -1,5 +1,4 @@
-onlyBuiltDependencies:
-  - dtrace-provider
-  - esbuild
-  - sharp
-  - spawn-sync
+allowBuilds:
+  esbuild: true
+  sharp: true
+  spawn-sync: true
