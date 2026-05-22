@@ -12,7 +12,9 @@ export default defineContentScript({
 		'https://gift-talk.kakao.com/appredirect?to=*',
 		'https://qr.kakaopay.com/*',
 		'https://receipt.allink.io/*', // 소설 로그인 후 휴대폰 인증 불가, 빈 화면 표시됨
+		'https://service.kakaomobility.com/launch/kakaot/*',
 		'https://shoppinglive.kakao.com/bridge?redirect=*',
+		'https://store.kakao.com/*',
 	],
 	runAt: 'document_start',
 	main: (ctx) => {
