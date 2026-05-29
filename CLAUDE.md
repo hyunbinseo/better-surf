@@ -14,3 +14,15 @@ Prepend rules on top of each file's `rule_*` arrays.
         ├── 101_bloats.ts     # analytics, etc.
         └── 201_firefox.ts
 ```
+
+## Sites
+
+### YouTube
+
+Use `urlFilter` unless capture groups are needed.
+
+| Type      | Rule          | Domains                  |
+| --------- | ------------- | ------------------------ |
+| Utilities | `urlFilter`   | `www.` only              |
+| Utilities | `regexFilter` | bare and `www.`          |
+| Bloats    | `regexFilter` | all including `youtu.be` |

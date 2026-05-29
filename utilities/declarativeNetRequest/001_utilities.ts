@@ -55,23 +55,6 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
 		action: {
-			type: 'redirect',
-			redirect: {
-				transform: {
-					queryTransform: {
-						removeParams: ['si'],
-					},
-				},
-			},
-		},
-		condition: {
-			regexFilter: '^https://((www\\.)?youtube\\.com|youtu\\.be)/',
-			resourceTypes: ['main_frame'],
-		},
-	},
-	{
-		id: 0,
-		action: {
 			type: 'modifyHeaders',
 			requestHeaders: [
 				{

@@ -91,6 +91,23 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 			redirect: {
 				transform: {
 					queryTransform: {
+						removeParams: ['si'],
+					},
+				},
+			},
+		},
+		condition: {
+			regexFilter: '^https://(youtu\\.be|(?:.+\\.)?youtube\\.com)/',
+			resourceTypes: ['main_frame'],
+		},
+	},
+	{
+		id: 0,
+		action: {
+			type: 'redirect',
+			redirect: {
+				transform: {
+					queryTransform: {
 						removeParams: ['redir_token'],
 					},
 				},
