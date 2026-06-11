@@ -24,11 +24,6 @@ export default defineConfig({
 		name: 'Better Surf',
 		description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
 		host_permissions: [
-			'https://*.abr.ge/*',
-			'https://*.airbridge.io/*',
-			'https://*.blux.ai/*',
-			'https://*.epost.go.kr/*',
-			'https://buttr.dev/*',
 			'https://cdn.hancom.com/*',
 			'https://pbs.twimg.com/*',
 			'https://www.nl.go.kr/*',

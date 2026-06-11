@@ -15,6 +15,10 @@ Prepend rules on top of each file's `rule_*` arrays.
         └── 201_firefox.ts
 ```
 
+> `"declarativeNetRequest"` — triggers a permission warning at install time but provides implicit access to `allow`, `allowAllRequests` and `block` rules. Use this when possible to avoid needing to request full access to hosts.
+
+For rule action types not listed above, sync the target domain with `host_permissions` in `wxt.config.ts`.
+
 ## Sites
 
 ### YouTube
