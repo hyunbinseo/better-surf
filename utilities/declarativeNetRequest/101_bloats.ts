@@ -4,6 +4,14 @@ const MAX_VALUE = 200;
 export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
+		action: { type: 'block' },
+		condition: {
+			urlFilter: '|https://*.groobee.io/*',
+			resourceTypes: ['script', 'xmlhttprequest', 'sub_frame'],
+		},
+	},
+	{
+		id: 0,
 		action: {
 			type: 'redirect',
 			redirect: {
@@ -18,7 +26,6 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 							'utm_medium',
 							'utm_source',
 							'utm_term',
-
 							'_openstat', // Yandex
 							'dclid', // Google
 							'epik', // Pinterest
