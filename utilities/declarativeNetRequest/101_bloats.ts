@@ -138,6 +138,14 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 		action: { type: 'block' },
 		condition: {
 			// e.g. https://static.airbridge.io/sdk/latest/airbridge.min.js
+			urlFilter: '|https://*.airbridge.io/*',
+			resourceTypes: ['script', 'xmlhttprequest', 'sub_frame'],
+		},
+	},
+	{
+		id: 0,
+		action: { type: 'block' },
+		condition: {
 			urlFilter: '|https://*.abr.ge/*',
 			resourceTypes: ['script', 'xmlhttprequest', 'sub_frame'],
 		},
