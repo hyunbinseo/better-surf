@@ -3,6 +3,9 @@
 	"compilerOptions": {
 		"types": ["chrome-types", "node"],
 
+		"allowJs": true,
+		"checkJs": true,
+
 		// Stricter Typechecking Options
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,

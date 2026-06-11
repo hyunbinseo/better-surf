@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { loadEnvFile } from 'node:process';
 import { object, parse, pipe, string, uuid } from 'valibot';
 import { defineConfig } from 'wxt';
+import svelteConfig from './svelte.config.js';
 import { rule_utilities } from './utilities/declarativeNetRequest/001_utilities';
 import { rule_bloats } from './utilities/declarativeNetRequest/101_bloats';
 import { rule_firefox } from './utilities/declarativeNetRequest/201_firefox';
@@ -74,6 +75,7 @@ export default defineConfig({
 		'@wxt-dev/auto-icons', //
 		'@wxt-dev/module-svelte',
 	],
+	svelte: { vite: svelteConfig },
 	autoIcons: {
 		baseIconPath: './assets/icon.svg',
 		developmentIndicator: 'overlay',

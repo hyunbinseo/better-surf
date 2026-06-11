@@ -14,18 +14,18 @@
 		</select>
 	</label>
 	{#if value === 'qr'}
-		{#await browser.tabs.query({ active: true, currentWindow: true }) then tabs}
-			{@const url = tabs[0]?.url}
-			{#if url && (url.startsWith('https://') || url.startsWith('http://'))}
-				{@html new QRCode({
-					content: url,
-					padding: 0,
-					ecl: 'M',
-					join: true,
-					xmlDeclaration: false,
-					container: 'svg-viewbox',
-				}).svg()}
-			{/if}
-		{/await}
+		{const tabs = await browser.tabs.query({ active: true, currentWindow: true })}
+		{const url = tabs[0]?.url}
+		{#if url && (url.startsWith('https://') || url.startsWith('http://'))}
+			{const qr = new QRCode({
+				content: url,
+				padding: 0,
+				ecl: 'M',
+				join: true,
+				xmlDeclaration: false,
+				container: 'svg-viewbox',
+			})}
+			{@html qr.svg()}
+		{/if}
 	{/if}
 </main>
