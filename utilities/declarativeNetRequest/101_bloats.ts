@@ -108,6 +108,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 			resourceTypes: ['main_frame'],
 		},
 	},
+	// NOTE Cannot directly redirect as query parameters cannot be URL-decoded
 	{
 		id: 0,
 		action: {
