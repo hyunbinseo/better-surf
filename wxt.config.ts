@@ -23,18 +23,7 @@ export default defineConfig({
 	manifest: ({ browser }) => ({
 		name: 'Better Surf',
 		description: '더 나은 웹 서핑을 위한 소소하지만 강력한 도구들',
-		host_permissions: [
-			'https://cdn.hancom.com/*',
-			'https://pbs.twimg.com/*',
-			'https://threads.com/*',
-			'https://threads.net/*',
-			'https://www.nl.go.kr/*',
-			'https://www.threads.com/*',
-			'https://www.threads.net/*',
-			'https://www.youtube.com/*',
-			'https://youtu.be/*',
-			'https://youtube.com/*',
-		],
+		host_permissions: ['*://*/*'],
 		permissions: ['declarativeNetRequest', 'tabs'],
 		// See https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest
 		declarative_net_request: {
@@ -83,8 +72,6 @@ export default defineConfig({
 	hooks: {
 		'build:manifestGenerated': (wxt, manifest) => {
 			if (wxt.config.browser === 'firefox') {
-				// FIXME Inferred as any, not as string[] | undefined
-				manifest.host_permissions.push('https://*.swit.io/*');
 				manifest.declarative_net_request?.rule_resources?.push({
 					id: 'firefox',
 					path: 'rules/firefox.json',
