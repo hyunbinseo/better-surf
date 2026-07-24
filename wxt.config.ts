@@ -26,7 +26,11 @@ export default defineConfig({
 		host_permissions: [
 			'https://cdn.hancom.com/*',
 			'https://pbs.twimg.com/*',
+			'https://threads.com/*',
+			'https://threads.net/*',
 			'https://www.nl.go.kr/*',
+			'https://www.threads.com/*',
+			'https://www.threads.net/*',
 			'https://www.youtube.com/*',
 			'https://youtu.be/*',
 			'https://youtube.com/*',
@@ -51,7 +55,7 @@ export default defineConfig({
 			...(browser === 'firefox' && {
 				gecko: {
 					id: `{${env.FIREFOX_EXTENSION_UUID}}`,
-					strict_min_version: '140.0', // https://developer.mozilla.org/en-US/docs/Web/API/CookieStore
+					strict_min_version: '142.0', // https://developer.mozilla.org/en-US/docs/Web/API/URLPattern
 					// See https://extensionworkshop.com/documentation/develop/firefox-builtin-data-consent
 					data_collection_permissions: { required: ['none'] },
 				},

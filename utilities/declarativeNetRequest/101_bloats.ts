@@ -4,6 +4,22 @@ const MAX_VALUE = 200;
 export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
+		action: {
+			type: 'redirect',
+			redirect: {
+				transform: {
+					host: 'www.threads.com',
+					queryTransform: { removeParams: ['xmt'] },
+				},
+			},
+		},
+		condition: {
+			requestDomains: ['threads.com', 'threads.net'],
+			resourceTypes: ['main_frame'],
+		},
+	},
+	{
+		id: 0,
 		action: { type: 'block' },
 		condition: {
 			urlFilter: '|https://*.groobee.io/*',
