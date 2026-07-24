@@ -87,7 +87,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
-			regexFilter: '[?&]airbridge_referrer=',
+			urlFilter: 'airbridge_referrer=',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -104,7 +104,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
-			regexFilter: '^https://(youtu\\.be|(?:.+\\.)?youtube\\.com)/',
+			requestDomains: ['youtube.com', 'youtu.be'],
 			resourceTypes: ['main_frame'],
 		},
 	},
