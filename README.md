@@ -45,13 +45,11 @@
 ## 기타 기능
 
 - Firefox 접속 차단 우회 ([Swit](https://swit.io/) 등)
-- X/트위터 원본 이미지 표시[^main_frame]
-- YouTube Shorts 플레이어 미사용[^main_frame]
+- X/트위터 이미지 URL 직접 접속 시 원본 표시
+- YouTube Shorts 직접 접속 시 플레이어 선택
 - [YouTube TV 웹사이트](https://www.youtube.com/tv#/) 접속 허용
 - [뉴데일리](https://newdaily.co.kr/)가 윤서인 씨 연재 매체임을 안내
 - [서울대학교 수강신청 시스템](https://sugang.snu.ac.kr/) 다중 접속 허용[^snu-sugang]
 - [한글과컴퓨터](https://store.hancom.com/) 로그인 없이 [설치 파일 다운로드](./docs/hancom.md)
-
-[^main_frame]: 해당 웹사이트에 직접 접속한 경우에 한함
 
 [^snu-sugang]: '이미 수강신청 프로그램을 사용 중입니다. 사용 중인 웹브라우저를 모두 종료하고 새 웹브라우저를 연 후 다시 시도해 보시기 바랍니다.' 대화상자를 우회합니다.
