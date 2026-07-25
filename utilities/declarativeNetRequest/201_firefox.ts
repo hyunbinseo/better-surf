@@ -22,5 +22,6 @@ export const rule_firefox: chrome.declarativeNetRequest.Rule[] = [
 ];
 
 for (const [index, rule] of rule_firefox.entries()) {
+	rule.priority ??= 4;
 	rule.id = MIN_VALUE + rule_firefox.length - index - 1;
 }

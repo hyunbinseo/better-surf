@@ -83,5 +83,6 @@ export const rule_utilities: chrome.declarativeNetRequest.Rule[] = [
 if (rule_utilities.length > MAX_VALUE - MIN_VALUE + 1) throw new RangeError();
 
 for (const [index, rule] of rule_utilities.entries()) {
+	rule.priority ??= 3;
 	rule.id = MIN_VALUE + rule_utilities.length - index - 1;
 }

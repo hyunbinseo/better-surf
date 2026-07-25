@@ -8,13 +8,15 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 			type: 'redirect',
 			redirect: {
 				transform: {
-					host: 'www.threads.com',
-					queryTransform: { removeParams: ['xmt'] },
+					queryTransform: {
+						removeParams: ['xmt'],
+					},
 				},
 			},
 		},
 		condition: {
 			requestDomains: ['threads.com', 'threads.net'],
+			urlFilter: 'xmt=',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -28,6 +30,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 	},
 	{
 		id: 0,
+		priority: 1,
 		action: {
 			type: 'redirect',
 			redirect: {
@@ -121,6 +124,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 		},
 		condition: {
 			requestDomains: ['youtube.com', 'youtu.be'],
+			urlFilter: 'si=',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -138,7 +142,7 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
-			urlFilter: '|https://www.youtube.com/redirect^*',
+			urlFilter: '|https://www.youtube.com/redirect^*redir_token=*',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -180,5 +184,6 @@ export const rule_bloats: chrome.declarativeNetRequest.Rule[] = [
 if (rule_bloats.length > MAX_VALUE - MIN_VALUE + 1) throw new RangeError();
 
 for (const [index, rule] of rule_bloats.entries()) {
+	rule.priority ??= 2;
 	rule.id = MIN_VALUE + rule_bloats.length - index - 1;
 }
