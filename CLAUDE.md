@@ -2,6 +2,12 @@
 
 - Sync `README.md` with added or removed features. Minor or personal features may be intentionally excluded; only add if the feature has broad user impact.
 
+## Testing
+
+Don't use `wxt dev` — it launches its own browser instance that an agent can't drive.
+
+Use the `chrome-devtools` MCP to test this extension in a real browser: run the `build` script, then load `.output/chrome-mv3` via the MCP's `install_extension` tool.
+
 ## Content Scripts
 
 Document non-obvious matching/parsing logic with a real example URL as a comment, placed directly above the line it explains (a `matches` entry, a condition, or a parsing step).
@@ -10,6 +16,7 @@ Document non-obvious matching/parsing logic with a real example URL as a comment
 
 - Check `chrome-types` JSDoc and [documentation](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest) for the spec.
 - Avoid `regexFilter` condition unless capture groups are required.
+- Update and test the `Redirect Checklists` on redirect rule changes.
 
 Narrow conditions — a no-op match is still a match, and can block a lower-priority rule from ever running.
 
@@ -48,9 +55,18 @@ All rules share one evaluation space — the actions above are mutually exclusiv
 
 A `redirect` produces a new request, which gets evaluated from scratch — so each hop in a redirect chain can be won by a different rule.
 
+### Redirect Checklists
+
 ```
-307 https://youtube.com/shorts/RZ5OtdsXBsg?si=1&utm_source=2
-307 https://youtube.com/shorts/RZ5OtdsXBsg?utm_source=2
+307 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com&redir_token=1&si=2
+307 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com&si=2
+200 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com
+200 https://example.com/
+```
+
+```
+307 https://youtube.com/shorts/RZ5OtdsXBsg?utm_source=1&si=2
+307 https://youtube.com/shorts/RZ5OtdsXBsg?utm_source=1
 301 https://youtube.com/shorts/RZ5OtdsXBsg
 200 https://www.youtube.com/shorts/RZ5OtdsXBsg
 ```
@@ -60,4 +76,19 @@ A `redirect` produces a new request, which gets evaluated from scratch — so ea
 307 https://threads.com/@threads?utm_source=1
 301 https://threads.com/@threads
 200 https://www.threads.com/@threads
+```
+
+```
+307 https://example.com/?utm_source=1&fbclid=2
+200 https://example.com/
+```
+
+```
+307 https://example.com/?airbridge_referrer=1&sub_id=2
+200 https://example.com/
+```
+
+```
+307 https://pbs.twimg.com/media/ABC123?format=jpg&name=small
+200 https://pbs.twimg.com/media/ABC123?format=jpg&name=orig
 ```
