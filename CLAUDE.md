@@ -51,6 +51,8 @@ Each becomes its own ruleset, so its `Rule.id`s just start at `1`. Across files,
 
 All rules share one evaluation space — the actions above are mutually exclusive "terminating" actions, and untargeted rules (no `urlFilter`/`requestDomains`, e.g. the generic tracker-stripping rule) can match requests meant for a more specific rule. Beyond the action-type tie-break above, same-priority-and-action ties resolve via unspecified, non-standardized ordering — set an explicit `priority` (default `1`, must be `>= 1`, bigger is higher) on the more specific rule so it deterministically wins.
 
+In Firefox (not Chrome), a `modifyHeaders` rule co-matched by any terminating-action rule is silently dropped, regardless of priority. Scope the competing rule away with `excludedRequestDomains` instead.
+
 ### Redirect Chains
 
 A `redirect` produces a new request, which gets evaluated from scratch — so each hop in a redirect chain can be won by a different rule.

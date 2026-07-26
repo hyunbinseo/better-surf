@@ -42,6 +42,12 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
+			// Avoid conflicts with Firefox `modifyHeaders`
+			excludedRequestDomains: [
+				'cdn.hancom.com', //
+				'www.nl.go.kr',
+				'www.youtube.com', // `si` removed elsewhere
+			],
 			resourceTypes: ['main_frame'],
 		},
 	},
