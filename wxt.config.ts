@@ -1,21 +1,18 @@
 import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'node:path';
 import { loadEnvFile } from 'node:process';
+import { pathToFileURL } from 'node:url';
 import { object, parse, pipe, string, uuid } from 'valibot';
 import { defineConfig } from 'wxt';
 import svelteConfig from './svelte.config.js';
-import { rule_utilities } from './utilities/declarativeNetRequest/001_utilities';
-import { rule_bloats } from './utilities/declarativeNetRequest/101_bloats';
-import { rule_firefox } from './utilities/declarativeNetRequest/201_firefox';
+import { dnrRulesets } from './utilities/declarativeNetRequest';
+import { rules as trackerRules } from './utilities/declarativeNetRequest/trackers';
+
+const DNR_DEFAULT_SITE_PRIORITY = 100;
 
 loadEnvFile(resolve(import.meta.dirname, '.env.submit'));
 
-const env = parse(
-	object({
-		FIREFOX_EXTENSION_UUID: pipe(string(), uuid()),
-	}),
-	process.env,
-);
+const env = parse(object({ FIREFOX_EXTENSION_UUID: pipe(string(), uuid()) }), process.env);
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
@@ -28,16 +25,12 @@ export default defineConfig({
 		// See https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest
 		declarative_net_request: {
 			rule_resources: [
-				{
-					id: 'utilities',
-					path: 'rules/utilities.json',
+				{ id: 'trackers', path: 'rules/trackers.json', enabled: true },
+				...dnrRulesets.map(({ name }) => ({
+					id: name,
+					path: `rules/${name}.json`,
 					enabled: true,
-				},
-				{
-					id: 'bloats',
-					path: 'rules/bloats.json',
-					enabled: true,
-				},
+				})),
 			],
 		},
 		browser_specific_settings: {
@@ -70,33 +63,31 @@ export default defineConfig({
 		developmentIndicator: 'overlay',
 	},
 	hooks: {
-		'build:manifestGenerated': (wxt, manifest) => {
-			if (wxt.config.browser === 'firefox') {
-				manifest.declarative_net_request?.rule_resources?.push({
-					id: 'firefox',
-					path: 'rules/firefox.json',
-					enabled: true,
-				});
+		'build:publicAssets': async (_wxt, assets) => {
+			for (const [index, rule] of trackerRules.entries()) {
+				rule.id = index + 1;
 			}
-		},
-		'build:publicAssets': (wxt, assets) => {
+
 			assets.push(
 				{
-					relativeDest: 'rules/utilities.json',
-					contents: JSON.stringify(rule_utilities),
+					relativeDest: 'rules/trackers.json',
+					contents: JSON.stringify(trackerRules),
 				},
-				{
-					relativeDest: 'rules/bloats.json',
-					contents: JSON.stringify(rule_bloats),
-				},
+				...(await Promise.all(
+					dnrRulesets.map(async ({ name, path }) => {
+						const rules = (await import(pathToFileURL(path).href))
+							.rules as chrome.declarativeNetRequest.Rule[];
+						for (const [index, rule] of rules.entries()) {
+							rule.priority ??= DNR_DEFAULT_SITE_PRIORITY;
+							rule.id = index + 1;
+						}
+						return {
+							relativeDest: `rules/${name}.json`,
+							contents: JSON.stringify(rules),
+						};
+					}),
+				)),
 			);
-
-			if (wxt.config.browser === 'firefox') {
-				assets.push({
-					relativeDest: 'rules/firefox.json',
-					contents: JSON.stringify(rule_firefox),
-				});
-			}
 		},
 	},
 });

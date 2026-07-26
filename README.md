@@ -44,7 +44,6 @@
 
 ## 기타 기능
 
-- Firefox 접속 차단 우회 ([Swit](https://swit.io/) 등)
 - X/트위터 이미지 URL 직접 접속 시 원본 표시
 - YouTube Shorts 직접 접속 시 플레이어 선택
 - [YouTube TV 웹사이트](https://www.youtube.com/tv#/) 접속 허용
