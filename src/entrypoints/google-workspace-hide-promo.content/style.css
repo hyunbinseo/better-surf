@@ -1,0 +1,8 @@
+/* e.g. https://admin.google.com/u/0/ac/billing/buy */
+[data-action-behavior*='admin.google.com'][data-action-behavior*='/ac/billing/buy'] {
+	opacity: 0.1;
+}
+
+[data-promo-type] {
+	display: none !important;
+}
