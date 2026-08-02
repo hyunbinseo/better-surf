@@ -8,7 +8,9 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 				transform: {
 					queryTransform: {
 						removeParams: [
+							'ad_creative',
 							'ad_id',
+							'ad_type',
 							'campaign_id',
 							'utm_campaign',
 							'utm_content',
