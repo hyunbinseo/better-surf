@@ -97,7 +97,8 @@
 {/if}
 
 <style>
-	:global(html) {
+	:root,
+	:host {
 		background-color: white;
 	}
 	:global(body) {
