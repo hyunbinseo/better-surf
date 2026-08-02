@@ -2,3 +2,6 @@ allowBuilds:
   esbuild: true
   sharp: true
   spawn-sync: true
+
+overrides:
+  publish-browser-extension: 5.1.0
