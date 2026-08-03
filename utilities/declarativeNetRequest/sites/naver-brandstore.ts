@@ -7,16 +7,17 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 				transform: {
 					queryTransform: {
 						removeParams: [
-							'NaPm', //
-							'nl-query',
-							'nl-ts-pid',
+							'nt_detail', //
+							'nt_keyword',
+							'nt_medium',
+							'nt_source',
 						],
 					},
 				},
 			},
 		},
 		condition: {
-			requestDomains: ['smartstore.naver.com'],
+			requestDomains: ['brand.naver.com'],
 			resourceTypes: ['main_frame'],
 		},
 	},
