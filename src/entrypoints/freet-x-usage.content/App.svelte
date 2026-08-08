@@ -58,10 +58,10 @@
 	};
 </script>
 
-{#if !usage}
-	<span>불러오는 중…</span>
-{:else}
-	<main class="w-fit">
+<main class="w-fit p-4">
+	{#if !usage}
+		<span>불러오는 중…</span>
+	{:else}
 		<header class="flex items-center gap-x-2">
 			<h1 class="mr-auto">프리티 사용량 조회</h1>
 			<span class="text-sm">{usage.updatedAt.toLocaleTimeString('ko-KR')} 기준</span>
@@ -93,18 +93,12 @@
 				{/each}
 			</tbody>
 		</table>
-	</main>
-{/if}
+	{/if}
+</main>
 
 <style>
-	:root,
-	:host {
-		background-color: white;
-	}
 	:global(body) {
-		width: 100%;
-		height: 100%;
-		margin: calc(var(--spacing) * 4);
+		background-color: white;
 	}
 	th,
 	td {
