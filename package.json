@@ -1,7 +1,17 @@
 {
 	"name": "better-surf",
-	"private": true,
 	"version": "0.0.39",
+	"private": true,
+	"homepage": "https://github.com/hyunbinseo/better-surf#readme",
+	"bugs": {
+		"url": "https://github.com/hyunbinseo/better-surf/issues"
+	},
+	"license": "MIT",
+	"author": "Hyunbin Seo",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hyunbinseo/better-surf.git"
+	},
 	"type": "module",
 	"scripts": {
 		"dev": "wxt",
@@ -39,16 +49,6 @@
 		"web-ext": "^10.6.0",
 		"wxt": "^0.21.3"
 	},
-	"author": "Hyunbin Seo",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/hyunbinseo/better-surf.git"
-	},
-	"bugs": {
-		"url": "https://github.com/hyunbinseo/better-surf/issues"
-	},
-	"homepage": "https://github.com/hyunbinseo/better-surf#readme",
 	"devEngines": {
 		"runtime": {
 			"name": "node",
