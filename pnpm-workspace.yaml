@@ -1,7 +1,7 @@
 allowBuilds:
-  esbuild: true
-  sharp: true
-  spawn-sync: true
+  esbuild: false
+  sharp: false
+  spawn-sync: false
 
-overrides:
-  publish-browser-extension: 5.1.0
+update:
+  githubActions: true
