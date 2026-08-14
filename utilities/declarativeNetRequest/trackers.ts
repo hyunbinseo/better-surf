@@ -24,7 +24,9 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 							'fbclid', // Facebook
 							'gbraid', // Google
 							'gclid', // Google
+							'igsh', // Instagram
 							'igshid', // Instagram
+							'igsi', // Instagram
 							'li_fat_id', // LinkedIn
 							'mc_eid', // Mailchimp
 							'mkt_tok', // Marketo
