@@ -3,3 +3,10 @@
 		filter: invert(1);
 	}
 }
+
+#kakaoFoot,
+#kakaoHead,
+#kakaoIndex,
+#wrapMinidaum {
+	display: none;
+}
