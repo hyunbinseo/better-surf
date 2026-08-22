@@ -8,6 +8,16 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 					queryTransform: {
 						removeParams: [
 							'NaPm', //
+							'n_ad',
+							'n_ad_group',
+							'n_ad_group_type',
+							'n_campaign_type',
+							'n_mall_id',
+							'n_mall_pid',
+							'n_match',
+							'n_media',
+							'n_query',
+							'n_rank',
 							'nl-query',
 							'nl-ts-pid',
 						],
