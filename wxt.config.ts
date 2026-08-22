@@ -1,7 +1,7 @@
-import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'node:path';
 import { loadEnvFile } from 'node:process';
 import { pathToFileURL } from 'node:url';
+import tailwindcss from '@tailwindcss/vite';
 import { object, parse, pipe, string, uuid } from 'valibot';
 import { defineConfig } from 'wxt';
 import svelteConfig from './svelte.config.js';
