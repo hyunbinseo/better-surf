@@ -1,8 +1,0 @@
-/* NOTE Force dark mode with `filter: invert(1);` flashes white in Firefox on 검사하기/다시쓰기 reloads */
-
-#kakaoFoot,
-#kakaoHead,
-#kakaoIndex,
-#wrapMinidaum {
-	display: none;
-}

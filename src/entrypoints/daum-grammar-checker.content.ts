@@ -1,4 +1,6 @@
-import './style.css';
+/* NOTE 검사하기/다시쓰기 triggers a full page navigation, so CSS tweaks don't work:
+- `filter: invert(1);` for dark mode flashes white in Firefox
+- `display: none;` to hide elements causes UI shifts */
 
 export default defineContentScript({
 	matches: [
