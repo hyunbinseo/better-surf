@@ -1,0 +1,6 @@
+#whale-banner,
+#whale-banner-bottom,
+.ban_whale_wrap._fe_whale_banner_top,
+.ban_whale_download._fe_whale_banner_bottom {
+	display: none !important;
+}
