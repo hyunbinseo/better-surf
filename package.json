@@ -20,7 +20,7 @@
 		"build:firefox": "wxt build -b firefox --mv3",
 		"zip": "wxt zip",
 		"zip:firefox": "wxt zip -b firefox --mv3",
-		"check": "tsc && svelte-check --tsconfig ./tsconfig.json",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"fmt": "oxfmt",
 		"fmt:check": "oxfmt --check",
 		"lint": "oxlint",
@@ -29,7 +29,7 @@
 		"postversion": "git push && git push --tags && node cli/postversion.ts"
 	},
 	"devDependencies": {
-		"@lucide/svelte": "^1.33.0",
+		"@lucide/svelte": "^1.38.0",
 		"@tailwindcss/forms": "^0.5.11",
 		"@tailwindcss/vite": "^4.3.3",
 		"@tsconfig/svelte": "^5.0.8",
@@ -38,10 +38,11 @@
 		"@wxt-dev/auto-icons": "^1.1.2",
 		"@wxt-dev/module-svelte": "^2.0.5",
 		"chrome-types": "^0.1.440",
-		"oxfmt": "^0.64.0",
-		"oxlint": "^1.79.0",
+		"oxfmt": "^0.65.0",
+		"oxlint": "^1.80.0",
+		"oxlint-tsgolint": "^7.0.2001",
 		"qrcode-svg": "^1.1.0",
-		"svelte": "^5.56.10",
+		"svelte": "^5.57.0",
 		"svelte-check": "^4.7.6",
 		"tailwindcss": "^4.3.3",
 		"tslib": "^2.8.1",
@@ -54,12 +55,12 @@
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "11.22.0",
+			"version": "12.2.1",
 			"onFail": "download"
 		},
 		"runtime": {
 			"name": "node",
-			"version": "^24.19.0",
+			"version": "24.20.0",
 			"onFail": "download"
 		}
 	}

@@ -14,7 +14,7 @@ export default defineContentScript({
 
 			if (newUrl.pathname === '/bill/input') {
 				abortController = new AbortController();
-				세금계산서_작성(abortController.signal);
+				void 세금계산서_작성(abortController.signal);
 			}
 		});
 	},
