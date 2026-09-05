@@ -1,3 +1,7 @@
 [data-kb-popup-host='1'] {
 	display: none !important;
 }
+
+:has(> .hrm-portal-play-store-banner__text, > .hrm-portal-play-store-banner__badges) {
+	display: none;
+}
