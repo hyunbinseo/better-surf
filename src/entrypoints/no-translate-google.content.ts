@@ -10,16 +10,8 @@ export default defineContentScript({
 	runAt: 'document_start',
 	main: async () => {
 		const url = new URL(window.location.href);
-
-		// referrer is an empty string in Firefox
-		const switchToEnglish = import.meta.env.FIREFOX
-			? url.searchParams.has('hl') && //
-				window.confirm('Switch to English?')
-			: document.referrer &&
-				url.hostname !== new URL(document.referrer).hostname &&
-				url.searchParams.has('hl');
-
-		if (!switchToEnglish) return;
+		if (!url.searchParams.has('hl')) return;
+		if (!switchToEnglish(url)) return;
 
 		await cookieStore.set('django_language', 'en');
 		url.searchParams.delete('hl');
