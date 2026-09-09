@@ -61,11 +61,14 @@ A `redirect` produces a new request, which gets evaluated from scratch — so ea
 
 ### Redirect Checklists
 
+Hop-by-hop traces, verified with the `chrome-devtools` MCP. The trace is the spec: which params drop on which hop should make the rules in play self-evident. Pick a fixture that shows the interaction; annotate only when it can't.
+
+Re-run every trace after changing an untargeted `redirect` rule (`trackers.ts`), since it can shift hops in any chain; after changing a domain-scoped rule, re-run only the traces whose chain passes through that domain.
+
 ```
 307 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com&redir_token=1&si=2
 307 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com&si=2
 200 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com
-200 https://example.com/
 ```
 
 ```
@@ -82,13 +85,10 @@ A `redirect` produces a new request, which gets evaluated from scratch — so ea
 200 https://www.threads.com/@threads
 ```
 
-```
-307 https://example.com/?utm_source=1&fbclid=2
-200 https://example.com/
-```
+The `airbridge_referrer=` rule outranks the generic one and its `removeParams` is a superset, so one hop clears all; otherwise the generic params survive to a second hop.
 
 ```
-307 https://example.com/?airbridge_referrer=1&sub_id=2
+307 https://example.com/?utm_source=1&airbridge_referrer=2&sub_id=3
 200 https://example.com/
 ```
 
