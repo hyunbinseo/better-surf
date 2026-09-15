@@ -18,6 +18,7 @@
 		"dev:firefox": "wxt -b firefox --mv3",
 		"build": "wxt build",
 		"build:firefox": "wxt build -b firefox --mv3",
+		"test": "node --test",
 		"zip": "wxt zip",
 		"zip:firefox": "wxt zip -b firefox --mv3",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
@@ -26,6 +27,7 @@
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"postinstall": "wxt prepare",
+		"preversion": "node --run test",
 		"postversion": "git push && git push --tags && node cli/postversion.ts"
 	},
 	"devDependencies": {

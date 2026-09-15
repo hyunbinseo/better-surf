@@ -10,7 +10,15 @@ Use the `chrome-devtools` MCP to test this extension in a real browser: run the 
 
 ## Content Scripts
 
-Document non-obvious matching/parsing logic with a real example URL as a comment, placed directly above the line it explains (a `matches` entry, a condition, or a parsing step).
+Put a real example URL in a comment directly above the line it explains. Skip self-explanatory `matches`/`requestDomains`/`urlFilter` lines; comment the parsing step instead:
+
+```ts
+main: () => {
+	// https://brandconnect.naver.com/affiliates/000000000000000?channelProductNo=00000000000
+	const productId = new URL(window.location.href).searchParams.get('channelProductNo');
+```
+
+Anonymize IDs/tokens tied to a real account (affiliate IDs, channel IDs, session tokens) by replacing each character with a placeholder of a same length.
 
 ## `declarativeNetRequest`
 

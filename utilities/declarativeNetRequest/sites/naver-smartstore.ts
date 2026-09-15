@@ -20,6 +20,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 							'n_rank',
 							'nl-query',
 							'nl-ts-pid',
+							'originChannelInfo',
 						],
 					},
 				},
