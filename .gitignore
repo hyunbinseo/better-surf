@@ -7,13 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-.output
-stats.html
-stats-*.json
-.wxt
-web-ext.config.ts
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -24,3 +17,11 @@ web-ext.config.ts
 *.njsproj
 *.sln
 *.sw?
+
+*.local
+.output
+.wxt
+node_modules
+stats-*.json
+stats.html
+web-ext.config.ts
