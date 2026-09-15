@@ -12,6 +12,7 @@ export default defineContentScript({
 	include: ['firefox'],
 	matches: [
 		'https://gift-talk.kakao.com/appredirect?to=*',
+		'https://mkt.shopping.naver.com/link/*', // See https://github.com/hyunbinseo/better-surf/issues/19
 		'https://qr.kakaopay.com/*',
 		'https://receipt.allink.io/*', // 소설 로그인 후 휴대폰 인증 불가, 빈 화면 표시됨
 		'https://service.kakaomobility.com/launch/kakaot/*',
