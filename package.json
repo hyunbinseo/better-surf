@@ -1,6 +1,6 @@
 {
 	"name": "better-surf",
-	"version": "0.0.44",
+	"version": "0.0.45",
 	"private": true,
 	"homepage": "https://github.com/hyunbinseo/better-surf#readme",
 	"bugs": {
@@ -31,7 +31,7 @@
 		"postversion": "git push && git push --tags && node cli/postversion.ts"
 	},
 	"devDependencies": {
-		"@lucide/svelte": "^1.45.0",
+		"@lucide/svelte": "^1.46.0",
 		"@tailwindcss/forms": "^0.5.11",
 		"@tailwindcss/vite": "^4.3.3",
 		"@tsconfig/svelte": "^5.0.8",
@@ -39,7 +39,7 @@
 		"@types/qrcode-svg": "^1.1.5",
 		"@wxt-dev/auto-icons": "^1.1.2",
 		"@wxt-dev/module-svelte": "^2.0.5",
-		"chrome-types": "^0.1.445",
+		"chrome-types": "^0.1.447",
 		"oxfmt": "^0.67.0",
 		"oxlint": "^1.82.0",
 		"oxlint-tsgolint": "^7.0.2001",
