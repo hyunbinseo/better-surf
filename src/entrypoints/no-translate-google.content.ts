@@ -10,7 +10,8 @@ export default defineContentScript({
 	runAt: 'document_start',
 	main: async () => {
 		const url = new URL(window.location.href);
-		if (!url.searchParams.has('hl')) return;
+		const hl = url.searchParams.get('hl');
+		if (!hl || hl === 'en') return;
 		if (!switchToEnglish(url)) return;
 
 		await cookieStore.set('django_language', 'en');
