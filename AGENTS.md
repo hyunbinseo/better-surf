@@ -69,7 +69,7 @@ A `redirect` produces a new request, which gets evaluated from scratch — so ea
 
 ### Redirect Checklists
 
-Hop-by-hop traces, verified with the `chrome-devtools` MCP. The trace is the spec: which params drop on which hop should make the rules in play self-evident. Pick a fixture that shows the interaction; annotate only when it can't.
+Hop-by-hop traces, verified with the `chrome-devtools` MCP (`list_network_requests` with `includePreservedRequests: true`, or only the final hop is listed). The trace is the spec: which params drop on which hop should make the rules in play self-evident. Pick a fixture that shows the interaction; annotate only when it can't.
 
 Re-run every trace after changing an untargeted `redirect` rule (`trackers.ts`), since it can shift hops in any chain; after changing a domain-scoped rule, re-run only the traces whose chain passes through that domain.
 
