@@ -31,6 +31,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 							'mc_eid', // Mailchimp
 							'mkt_tok', // Marketo
 							'msclkid', // Microsoft
+							'psln', // Instagram
 							'rb_clickid', // Rakuten
 							'rdt_cid', // Reddit
 							's_cid', // Adobe
