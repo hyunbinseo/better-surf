@@ -1,4 +1,8 @@
-[data-promo-type],
+/*
+ * No bare [data-promo-type]: it also matches non-upsell banners,
+ * e.g. "Chat 환경 맞춤설정" (data-promo-type="2046") on https://chat.google.com/
+ */
+
 /* e.g. https://admin.google.com/u/0/ac/billing/buy */
 [data-action-behavior*='admin.google.com'][data-action-behavior*='/ac/billing/buy'] {
 	opacity: 0.2;
