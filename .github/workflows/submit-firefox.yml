@@ -1,6 +1,10 @@
-name: Submit to Addons.mozilla.org
+name: Submit to Firefox Add-ons
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   submit:
@@ -9,10 +13,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
 
-      - name: Zip extensions
+      - name: Zip extension
         run: pnpm zip:firefox
 
-      - name: Submit to stores
+      - name: Submit to Firefox Add-ons
         run: |
           pnpm wxt submit \
             --firefox-zip .output/*-firefox.zip --firefox-sources-zip .output/*-sources.zip

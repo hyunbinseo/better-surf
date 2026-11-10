@@ -1,7 +1,10 @@
-name: Submit Chrome Web Store
+name: Submit to Chrome Web Store
 
 on:
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   submit:
