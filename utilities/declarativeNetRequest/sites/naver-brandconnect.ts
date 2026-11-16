@@ -13,7 +13,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 		},
 	},
 	{
-		id: 1,
+		id: 0,
 		action: { type: 'block' },
 		condition: {
 			// https://brandconnect.pstatic.net/bridge/2026.08.20/assets/index-BkWlYaHD.js
