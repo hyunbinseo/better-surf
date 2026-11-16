@@ -1,3 +1,44 @@
+// Stripped on every site, so add only unambiguous trackers:
+// - Generic tracking names (e.g. `ad_id`, `utm_source`)
+// - Vendor params, commented with the vendor (e.g. `dclid`, `fbclid`)
+// Params a site may use for content (e.g. `ref`, `tag`) belong in `sites/`.
+// Firefox builds also merge these into every `sites/` redirect (`wxt.config.ts`).
+export const trackerParams = [
+	'ad_creative',
+	'ad_id',
+	'ad_type',
+	'campaign_id',
+	'utm_campaign',
+	'utm_content',
+	'utm_id',
+	'utm_medium',
+	'utm_source',
+	'utm_term',
+	'_openstat', // Yandex
+	'dclid', // Google
+	'epik', // Pinterest
+	'fbclid', // Facebook
+	'gbraid', // Google
+	'gclid', // Google
+	'igsh', // Instagram
+	'igshid', // Instagram
+	'igsi', // Instagram
+	'li_fat_id', // LinkedIn
+	'mc_eid', // Mailchimp
+	'mkt_tok', // Marketo
+	'msclkid', // Microsoft
+	'psln', // Instagram
+	'rb_clickid', // Rakuten
+	'rdt_cid', // Reddit
+	's_cid', // Adobe
+	'ScCid', // Snapchat
+	'srsltid', // Google
+	'ttclid', // TikTok
+	'twclid', // Twitter/X
+	'wbraid', // Google
+	'yclid', // Yandex
+];
+
 export const rules: chrome.declarativeNetRequest.Rule[] = [
 	{
 		id: 0,
@@ -7,41 +48,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 			redirect: {
 				transform: {
 					queryTransform: {
-						removeParams: [
-							'ad_creative',
-							'ad_id',
-							'ad_type',
-							'campaign_id',
-							'utm_campaign',
-							'utm_content',
-							'utm_id',
-							'utm_medium',
-							'utm_source',
-							'utm_term',
-							'_openstat', // Yandex
-							'dclid', // Google
-							'epik', // Pinterest
-							'fbclid', // Facebook
-							'gbraid', // Google
-							'gclid', // Google
-							'igsh', // Instagram
-							'igshid', // Instagram
-							'igsi', // Instagram
-							'li_fat_id', // LinkedIn
-							'mc_eid', // Mailchimp
-							'mkt_tok', // Marketo
-							'msclkid', // Microsoft
-							'psln', // Instagram
-							'rb_clickid', // Rakuten
-							'rdt_cid', // Reddit
-							's_cid', // Adobe
-							'ScCid', // Snapchat
-							'srsltid', // Google
-							'ttclid', // TikTok
-							'twclid', // Twitter/X
-							'wbraid', // Google
-							'yclid', // Yandex
-						],
+						removeParams: trackerParams,
 					},
 				},
 			},
@@ -51,7 +58,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 			excludedRequestDomains: [
 				'cdn.hancom.com', //
 				'www.nl.go.kr',
-				'www.youtube.com', // `si` removed elsewhere
+				'www.youtube.com', // `/tv`; also skips `utm_*` on every www.youtube.com page
 			],
 			resourceTypes: ['main_frame'],
 		},
@@ -65,13 +72,13 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 				transform: {
 					queryTransform: {
 						removeParams: [
+							...trackerParams,
 							'airbridge_referrer',
 							'ad_creative_id',
 							'ad_group',
 							'ad_group_id',
 							'adfrom',
 							'campaign',
-							'campaign_id',
 							'click_id',
 							'gaid_raw',
 							'ifa_raw',
@@ -80,9 +87,6 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 							'sub2',
 							'sub_id',
 							'tracking_template_id',
-							'utm_campaign',
-							'utm_medium',
-							'utm_source',
 						],
 					},
 				},

@@ -61,14 +61,16 @@ In `utilities/declarativeNetRequest/` (`index.ts` globs `blocklists/` and `sites
 
 ### Chrome vs Firefox
 
-|                                    | Chrome     | Firefox                                |
-| ---------------------------------- | ---------- | -------------------------------------- |
-| `allow` vs `allowAllRequests`      | Equal      | `allow` wins[^docs-only]               |
-| Enabled static rulesets            | 50         | 20; the rest are silently ignored      |
-| No-op `redirect` match             | Skipped    | Wins; lower-priority rules don't run   |
-| `modifyHeaders` + terminating rule | Both apply | `modifyHeaders` is dropped[^ff-modify] |
+|                                    | Chrome     | Firefox                                        |
+| ---------------------------------- | ---------- | ---------------------------------------------- |
+| `allow` vs `allowAllRequests`      | Equal      | `allow` wins[^docs-only]                       |
+| Enabled static rulesets            | 50         | 20; the rest are silently ignored              |
+| No-op `redirect` match             | Skipped    | Wins; lower-priority rules don't run[^ff-noop] |
+| `modifyHeaders` + terminating rule | Both apply | `modifyHeaders` is dropped[^ff-modify]         |
 
 [^docs-only]: Per the Chrome and MDN docs; not verified (no rule here uses `allowAllRequests`).
+
+[^ff-noop]: Firefox builds merge `trackerParams` into every `sites/` `queryTransform` redirect (`wxt.config.ts`), so a winning no-op loses nothing.
 
 [^ff-modify]: Regardless of priority, including a no-op match from the untargeted `trackers.ts` redirect, which matches every `main_frame`. Scope the competing rule away with `excludedRequestDomains`.
 
@@ -104,7 +106,7 @@ In `utilities/declarativeNetRequest/` (`index.ts` globs `blocklists/` and `sites
 
 ```plaintext
 # The airbridge rule outranks the generic one and removes a superset of its params, so one hop clears all.
-307 https://example.com/?utm_source=1&airbridge_referrer=2&sub_id=3
+307 https://example.com/?fbclid=1&airbridge_referrer=2&sub_id=3
 200 https://example.com/
 ```
 
@@ -115,6 +117,13 @@ In `utilities/declarativeNetRequest/` (`index.ts` globs `blocklists/` and `sites
 
 ```plaintext
 307 https://pbs.twimg.com/media/ABC123?format=jpg&name=orig&utm_source=1
-# Firefox stops at the line above: the no-op redirect wins.
 404 https://pbs.twimg.com/media/ABC123?format=jpg&name=orig
+```
+
+```plaintext
+# The musinsa rule keeps `af_dp`, so it no-ops on hop 2. Chrome falls through to the generic rule; Firefox clears all on hop 1 (merged `trackerParams`).
+307 https://www.musinsa.com/?af_dp=1&pid=2&utm_source=3
+307 https://www.musinsa.com/?af_dp=1&utm_source=3
+308 https://www.musinsa.com/?af_dp=1
+200 https://www.musinsa.com/main/musinsa/recommend?af_dp=1
 ```

@@ -6,7 +6,7 @@ import { object, parse, pipe, string, uuid } from 'valibot';
 import { defineConfig } from 'wxt';
 import svelteConfig from './svelte.config.js';
 import { dnrRulesets } from './utilities/declarativeNetRequest';
-import { rules as trackerRules } from './utilities/declarativeNetRequest/trackers';
+import { rules as trackerRules, trackerParams } from './utilities/declarativeNetRequest/trackers';
 
 const DNR_DEFAULT_SITE_PRIORITY = 100;
 
@@ -63,7 +63,7 @@ export default defineConfig({
 		developmentIndicator: 'overlay',
 	},
 	hooks: {
-		'build:publicAssets': async (_wxt, assets) => {
+		'build:publicAssets': async (wxt, assets) => {
 			for (const [index, rule] of trackerRules.entries()) {
 				rule.id = index + 1;
 			}
@@ -87,6 +87,14 @@ export default defineConfig({
 						for (const [index, rule] of rules.entries()) {
 							rule.priority ??= DNR_DEFAULT_SITE_PRIORITY;
 							rule.id = index + 1;
+							// In Firefox, a no-op `redirect` match still wins over lower-priority
+							// rules (e.g. `trackers.ts`), so strip generic params here too.
+							const queryTransform = rule.action.redirect?.transform?.queryTransform;
+							if (wxt.config.browser === 'firefox' && queryTransform) {
+								queryTransform.removeParams = [
+									...new Set([...trackerParams, ...(queryTransform.removeParams ?? [])]),
+								];
+							}
 						}
 						return {
 							relativeDest: `rules/${name}.json`,
