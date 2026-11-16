@@ -21,7 +21,7 @@ Test every behavior change in both Chrome and Firefox:
 
 ## Example URLs
 
-- Comment a real URL above code that reads or matches one, unless the pattern already is a full URL (e.g. `urlFilter: '|https://www.youtube.com/tv^'`).
+- Comment a real URL above code that reads or matches one, unless the pattern already is a full URL (e.g. `urlFilter: '|https://www.youtube.com/tv^'`) or the condition only lists `requestDomains`.
 - Anonymize account-tied IDs and tokens (affiliate IDs, channel IDs, session tokens) by replacing each character with a placeholder, keeping the length.
 
 ```ts

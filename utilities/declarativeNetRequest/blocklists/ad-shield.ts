@@ -8,7 +8,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 				'content-load.com',
 				'content-loader.com',
 				'css-load.com',
-				'error-report.com', // e.g. https://info.error-report.com/modal?eventId=&error=... (dogdrip.net)
+				'error-report.com', // https://info.error-report.com/modal?eventId=&error=... (dogdrip.net)
 				'html-load.cc',
 				'html-load.com',
 				'js-load.com',
