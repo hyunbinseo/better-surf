@@ -2,8 +2,13 @@
 	"mcpServers": {
 		"chrome-devtools": {
 			"type": "stdio",
-			"command": "pnpm",
-			"args": ["dlx", "chrome-devtools-mcp@latest", "--categoryExtensions", "--no-usage-statistics"]
+			"command": "vpx",
+			"args": ["chrome-devtools-mcp@latest", "--categoryExtensions", "--no-usage-statistics"]
+		},
+		"firefox-devtools": {
+			"type": "stdio",
+			"command": "vpx",
+			"args": ["@mozilla/firefox-devtools-mcp@latest", "--headless", "--tool-preset", "developer"]
 		}
 	}
 }
