@@ -13,7 +13,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 		},
 		condition: {
 			requestDomains: ['threads.com', 'threads.net'],
-			urlFilter: 'xmt=',
+			urlFilter: '^xmt=',
 			resourceTypes: ['main_frame'],
 		},
 	},

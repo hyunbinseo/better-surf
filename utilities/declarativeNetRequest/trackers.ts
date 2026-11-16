@@ -93,7 +93,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
-			urlFilter: 'airbridge_referrer=',
+			urlFilter: '^airbridge_referrer=',
 			resourceTypes: ['main_frame'],
 		},
 	},

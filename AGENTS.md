@@ -35,6 +35,7 @@ const productId = new URL(window.location.href).searchParams.get('channelProduct
   - Where they differ, follow the stricter one and record the verified difference in [Chrome vs Firefox](#chrome-vs-firefox).
 - Avoid `regexFilter` unless capture groups are required.
 - Narrow conditions (e.g. in Firefox, a no-op `redirect` blocks lower-priority rules).
+  - Prefix param `urlFilter`s with `^` (`'^si='` won't match `psi=`).
 - Keep `host_permissions` at `*://*/*` in `wxt.config.ts`.
   - With per-domain entries, a missing domain works in `wxt dev` but not in production ([#434](https://github.com/wxt-dev/wxt/issues/434)).
 
@@ -102,6 +103,13 @@ In `utilities/declarativeNetRequest/` (`index.ts` globs `blocklists/` and `sites
 307 https://threads.com/@threads?utm_source=1
 301 https://threads.com/@threads
 200 https://www.threads.com/@threads
+```
+
+```plaintext
+# `pxmt` isn't `xmt`, so the threads rule doesn't match and the generic one runs.
+307 https://threads.com/@threads?pxmt=1&utm_source=2
+301 https://threads.com/@threads?pxmt=1
+200 https://www.threads.com/@threads?pxmt=1
 ```
 
 ```plaintext

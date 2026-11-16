@@ -25,7 +25,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 		},
 		condition: {
 			requestDomains: ['musinsa.com'],
-			urlFilter: 'af_dp=',
+			urlFilter: '^af_dp=',
 			resourceTypes: ['main_frame'],
 		},
 	},

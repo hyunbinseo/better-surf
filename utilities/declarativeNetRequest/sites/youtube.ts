@@ -30,7 +30,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 		},
 		condition: {
 			requestDomains: ['youtube.com', 'youtu.be'],
-			urlFilter: 'si=',
+			urlFilter: '^si=',
 			resourceTypes: ['main_frame'],
 		},
 	},
@@ -48,7 +48,7 @@ export const rules: chrome.declarativeNetRequest.Rule[] = [
 			},
 		},
 		condition: {
-			urlFilter: '|https://www.youtube.com/redirect^*redir_token=*',
+			urlFilter: '|https://www.youtube.com/redirect^*^redir_token=',
 			resourceTypes: ['main_frame'],
 		},
 	},
