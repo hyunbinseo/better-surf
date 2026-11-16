@@ -27,6 +27,7 @@ export const trackerParams = [
 	'mc_eid', // Mailchimp
 	'mkt_tok', // Marketo
 	'msclkid', // Microsoft
+	'obrf', // Instagram (outbound referral)
 	'psln', // Instagram
 	'rb_clickid', // Rakuten
 	'rdt_cid', // Reddit
