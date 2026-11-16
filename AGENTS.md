@@ -4,9 +4,20 @@
 
 ## Testing
 
-Don't use `wxt dev` — it launches its own browser instance that an agent can't drive.
+Test every behavior change in both Chrome and Firefox:
 
-Use the `chrome-devtools` MCP to test this extension in a real browser: run the `build` script, then load `.output/chrome-mv3` via the MCP's `install_extension` tool.
+|                 | Chrome                 | Firefox                               |
+| --------------- | ---------------------- | ------------------------------------- |
+| MCP             | `chrome-devtools`      | `firefox-devtools`                    |
+| Build script    | `build`                | `build:firefox`                       |
+| Install         | `.output/chrome-mv3`   | `.output/firefox-mv3`, `type: "path"` |
+| Reload          | `reload_extension`     | `uninstall_extension` then reinstall  |
+| Redirect hops   | All hops[^chrome-hops] | Final hop only; check `location.href` |
+| `modifyHeaders` | Applied, then logged   | Logged, then applied[^ff-headers]     |
+
+[^chrome-hops]: `list_network_requests` with `includePreservedRequests: true`.
+
+[^ff-headers]: Verify by the page's response instead (e.g. `youtube.com/tv` stays on the TV UI only with the spoofed `User-Agent`).
 
 ## Content Scripts
 
