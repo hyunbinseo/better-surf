@@ -1,6 +1,6 @@
 ## Common
 
-- Sync `README.md` with added or removed features. Minor or personal features may be intentionally excluded; only add if the feature has broad user impact.
+- Sync `README.md` with added or removed features that have broad user impact; minor or personal ones can stay out.
 
 ## Testing
 
@@ -19,101 +19,102 @@ Test every behavior change in both Chrome and Firefox:
 
 [^ff-headers]: Verify by the page's response instead (e.g. `youtube.com/tv` stays on the TV UI only with the spoofed `User-Agent`).
 
-## Content Scripts
+## Example URLs
 
-Put a real example URL in a comment directly above the line it explains. Skip self-explanatory `matches`/`requestDomains`/`urlFilter` lines; comment the parsing step instead:
+- Comment a real URL above code that reads or matches one, unless the pattern already is a full URL (e.g. `urlFilter: '|https://www.youtube.com/tv^'`).
+- Anonymize account-tied IDs and tokens (affiliate IDs, channel IDs, session tokens) by replacing each character with a placeholder, keeping the length.
 
 ```ts
-main: () => {
-	// https://brandconnect.naver.com/affiliates/000000000000000?channelProductNo=00000000000
-	const productId = new URL(window.location.href).searchParams.get('channelProductNo');
+// https://brandconnect.naver.com/affiliates/000000000000000?channelProductNo=00000000000
+const productId = new URL(window.location.href).searchParams.get('channelProductNo');
 ```
-
-Anonymize IDs/tokens tied to a real account (affiliate IDs, channel IDs, session tokens) by replacing each character with a placeholder of a same length.
 
 ## `declarativeNetRequest`
 
-- Check `chrome-types` JSDoc and [documentation](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest) for the spec.
-- Avoid `regexFilter` condition unless capture groups are required.
-- Update and test the `Redirect Checklists` on redirect rule changes.
-
-Narrow conditions — a no-op match is still a match, and can block a lower-priority rule from ever running.
-
-> Chrome picks at most one candidate per request. Chrome finds a matching rule, by ordering all matching rules by priority. Rules with the same priority are ordered by action (`allow` or `allowAllRequests` > `block` > `upgradeScheme` > `redirect`).
-
-### `host_permissions`
-
-The `wxt` dev script automatically adds every content script's `matches` to `host_permissions`, so a rule relying on a domain missing from that list can appear to work in dev but silently no-op in production. See [#434](https://github.com/wxt-dev/wxt/issues/434)
-
-This extension requests global `host_permissions` (`*://*/*`) in `wxt.config.ts` by design, so per-domain entries are not needed.
+- Check `chrome-types` JSDoc and the [Chrome](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest) / [MDN](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/declarativeNetRequest) docs for the spec.
+  - Where they differ, follow the stricter one and record the verified difference in [Chrome vs Firefox](#chrome-vs-firefox).
+- Avoid `regexFilter` unless capture groups are required.
+- Narrow conditions (e.g. in Firefox, a no-op `redirect` blocks lower-priority rules).
+- Keep `host_permissions` at `*://*/*` in `wxt.config.ts`.
+  - With per-domain entries, a missing domain works in `wxt dev` but not in production ([#434](https://github.com/wxt-dev/wxt/issues/434)).
 
 ### Rulesets
 
-A ruleset is one JSON rule file registered via a `Ruleset` dictionary (`{ id, path, enabled }`) in `rule_resources`. `Rule.id` only needs to be unique _within its own ruleset file_ — different rulesets can reuse the same numbers.
+In `utilities/declarativeNetRequest/` (`index.ts` globs `blocklists/` and `sites/`):
 
-```plaintext
-.
-└── utilities/
-    └── declarativeNetRequest/
-        ├── trackers.ts
-        ├── sites/
-        │   └── <site>.ts
-        └── blocklists/
-            └── <vendor>.ts
-```
+- `trackers.ts` → `rules/trackers.json`
+- `blocklists/*.ts` → `rules/blocklists.json`
+- `sites/*.ts` → `rules/sites.json`
 
-Firefox silently ignores every enabled static ruleset past the 20th in `rule_resources` (Chrome allows 50). Keep the ruleset count fixed; don't add one per file.
-
-Files under `sites/` and `blocklists/` are discovered via `glob` in `utilities/declarativeNetRequest/index.ts` — no manual registration needed.
-
-Each directory becomes one ruleset (`trackers`, `sites`, `blocklists`); `Rule.id`s are assigned at build time, so leave them `0`. Across files, entries can share the same default `priority` since their `requestDomains`/`urlFilter` don't overlap between different sites/vendors — but multiple rules _within_ the same file can still overlap (see `sites/youtube.ts`), and need an explicit `priority` if that overlap doesn't self-resolve.
+`Rule.id`s are assigned at build time; leave them `0`.
 
 ### Priorities
 
-All rules share one evaluation space — the actions above are mutually exclusive "terminating" actions, and untargeted rules (no `urlFilter`/`requestDomains`, e.g. the generic tracker-stripping rule) can match requests meant for a more specific rule. Beyond the action-type tie-break above, same-priority-and-action ties resolve via unspecified, non-standardized ordering — set an explicit `priority` (default `1`, must be `>= 1`, bigger is higher) on the more specific rule so it deterministically wins.
+- At most one terminating rule (all but `modifyHeaders`) applies per request, across all rulesets.
+  - A `redirect` starts a new request, so each hop gets its own (see [Redirect Checklists](#redirect-checklists)).
+  - Untargeted rules (no `urlFilter`/`requestDomains`, e.g. `trackers.ts`) compete with specific rules for that one slot.
+- The larger `priority` number wins (default `1`, must be `>= 1`).
+  - Within the same priority, action decides: `allow` >= `allowAllRequests` > `block` > `upgradeScheme` > `redirect`.
+- `wxt.config.ts` defaults every `sites/`/`blocklists/` rule's `priority` to `100`, above `trackers.ts` (`1`–`2`).
+  - Rules from different files can share `100` since their conditions don't overlap.
+  - When rules in one file overlap, raise the one that must win (e.g. `101` in `sites/youtube.ts`).
 
-At build time, `wxt.config.ts` defaults every `sites/`/`blocklists/` rule's `priority` to `100`, so it always outranks the generic rules (e.g. `trackers.ts`).
+### Chrome vs Firefox
 
-In Firefox (not Chrome), a `modifyHeaders` rule co-matched by any terminating-action rule is silently dropped, regardless of priority. Scope the competing rule away with `excludedRequestDomains` instead.
+|                                    | Chrome     | Firefox                                |
+| ---------------------------------- | ---------- | -------------------------------------- |
+| `allow` vs `allowAllRequests`      | Equal      | `allow` wins[^docs-only]               |
+| Enabled static rulesets            | 50         | 20; the rest are silently ignored      |
+| No-op `redirect` match             | Skipped    | Wins; lower-priority rules don't run   |
+| `modifyHeaders` + terminating rule | Both apply | `modifyHeaders` is dropped[^ff-modify] |
 
-### Redirect Chains
+[^docs-only]: Per the Chrome and MDN docs; not verified (no rule here uses `allowAllRequests`).
 
-A `redirect` produces a new request, which gets evaluated from scratch — so each hop in a redirect chain can be won by a different rule.
+[^ff-modify]: Regardless of priority, including a no-op match from the untargeted `trackers.ts` redirect, which matches every `main_frame`. Scope the competing rule away with `excludedRequestDomains`.
 
 ### Redirect Checklists
 
-Hop-by-hop traces, verified with the `chrome-devtools` MCP (`list_network_requests` with `includePreservedRequests: true`, or only the final hop is listed). The trace is the spec: which params drop on which hop should make the rules in play self-evident. Pick a fixture that shows the interaction; annotate only when it can't.
+- Each trace is the expected redirect chain for one URL: one line per hop, status then URL.
+  - Pick a URL whose hops show which rule fires where; add a `#` note only when they can't.
+- Add or update a trace when changing a `redirect` rule.
+  - Verify hops in Chrome and the final URL in Firefox (see [Testing](#testing)).
+- Re-run traces after changing a rule:
+  - Untargeted (`trackers.ts`): every trace, since it can shift hops in any chain.
+  - Domain-scoped: only traces whose chain passes through that domain.
 
-Re-run every trace after changing an untargeted `redirect` rule (`trackers.ts`), since it can shift hops in any chain; after changing a domain-scoped rule, re-run only the traces whose chain passes through that domain.
-
-```
+```plaintext
 307 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com&redir_token=1&si=2
 307 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com&si=2
 200 https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fexample.com
 ```
 
-```
+```plaintext
 307 https://youtube.com/shorts/RZ5OtdsXBsg?utm_source=1&si=2
 307 https://youtube.com/shorts/RZ5OtdsXBsg?utm_source=1
 301 https://youtube.com/shorts/RZ5OtdsXBsg
 200 https://www.youtube.com/shorts/RZ5OtdsXBsg
 ```
 
-```
+```plaintext
 307 https://threads.com/@threads?utm_source=1&xmt=2
 307 https://threads.com/@threads?utm_source=1
 301 https://threads.com/@threads
 200 https://www.threads.com/@threads
 ```
 
-The `airbridge_referrer=` rule outranks the generic one and its `removeParams` is a superset, so one hop clears all; otherwise the generic params survive to a second hop.
-
-```
+```plaintext
+# The airbridge rule outranks the generic one and removes a superset of its params, so one hop clears all.
 307 https://example.com/?utm_source=1&airbridge_referrer=2&sub_id=3
 200 https://example.com/
 ```
 
-```
+```plaintext
 307 https://pbs.twimg.com/media/ABC123?format=jpg&name=small
-200 https://pbs.twimg.com/media/ABC123?format=jpg&name=orig
+404 https://pbs.twimg.com/media/ABC123?format=jpg&name=orig
+```
+
+```plaintext
+307 https://pbs.twimg.com/media/ABC123?format=jpg&name=orig&utm_source=1
+# Firefox stops at the line above: the no-op redirect wins.
+404 https://pbs.twimg.com/media/ABC123?format=jpg&name=orig
 ```
