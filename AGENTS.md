@@ -51,9 +51,11 @@ A ruleset is one JSON rule file registered via a `Ruleset` dictionary (`{ id, pa
             └── <vendor>.ts
 ```
 
-Files under `sites/` and `blocklists/` are discovered via `glob` in `wxt.config.ts` — no manual registration needed.
+Firefox silently ignores every enabled static ruleset past the 20th in `rule_resources` (Chrome allows 50). Keep the ruleset count fixed; don't add one per file.
 
-Each becomes its own ruleset, so its `Rule.id`s just start at `1`. Across files, entries can share the same default `priority` since their `requestDomains`/`urlFilter` don't overlap between different sites/vendors — but multiple rules _within_ the same file can still overlap (see `sites/youtube.ts`), and need an explicit `priority` if that overlap doesn't self-resolve.
+Files under `sites/` and `blocklists/` are discovered via `glob` in `utilities/declarativeNetRequest/index.ts` — no manual registration needed.
+
+Each directory becomes one ruleset (`trackers`, `sites`, `blocklists`); `Rule.id`s are assigned at build time, so leave them `0`. Across files, entries can share the same default `priority` since their `requestDomains`/`urlFilter` don't overlap between different sites/vendors — but multiple rules _within_ the same file can still overlap (see `sites/youtube.ts`), and need an explicit `priority` if that overlap doesn't self-resolve.
 
 ### Priorities
 

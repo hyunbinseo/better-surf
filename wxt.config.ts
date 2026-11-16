@@ -74,9 +74,16 @@ export default defineConfig({
 					contents: JSON.stringify(trackerRules),
 				},
 				...(await Promise.all(
-					dnrRulesets.map(async ({ name, path }) => {
-						const rules = (await import(pathToFileURL(path).href))
-							.rules as chrome.declarativeNetRequest.Rule[];
+					dnrRulesets.map(async ({ name, paths }) => {
+						const rules = (
+							await Promise.all(
+								paths.map(
+									async (path) =>
+										(await import(pathToFileURL(path).href))
+											.rules as chrome.declarativeNetRequest.Rule[],
+								),
+							)
+						).flat();
 						for (const [index, rule] of rules.entries()) {
 							rule.priority ??= DNR_DEFAULT_SITE_PRIORITY;
 							rule.id = index + 1;

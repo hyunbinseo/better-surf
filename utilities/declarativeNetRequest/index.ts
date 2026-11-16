@@ -1,13 +1,12 @@
 import { globSync } from 'node:fs';
-import { basename, dirname, resolve } from 'node:path';
+import { resolve } from 'node:path';
 
-// Directory-qualified (e.g. `sites/youtube`, `blocklists/airbridge`) so
-// same-named files in sites/ and blocklists/ can't collide on ruleset id.
-export const dnrRulesets = globSync('{sites,blocklists}/*.ts', {
-	cwd: import.meta.dirname,
-})
-	.sort()
-	.map((file) => ({
-		name: `${basename(dirname(file))}/${basename(file, '.ts')}`,
-		path: resolve(import.meta.dirname, file),
-	}));
+// One ruleset per directory, not per file: Firefox silently ignores every
+// static ruleset past the 20th (Chrome allows 50). Priority is global, so
+// merging files doesn't change which rule wins.
+export const dnrRulesets = (['sites', 'blocklists'] as const).map((name) => ({
+	name,
+	paths: globSync(`${name}/*.ts`, { cwd: import.meta.dirname })
+		.sort()
+		.map((file) => resolve(import.meta.dirname, file)),
+}));
